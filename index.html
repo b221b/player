@@ -412,20 +412,48 @@
         /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             .top-panel {
-                justify-content: space-between;
+                justify-content: center;
                 padding-right: 20px;
             }
 
             .top-panel .logo {
-                padding-left: 20px;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                padding-left: 0;
+                z-index: 9;
             }
 
             .burger-menu-button {
                 display: block;
-                position: fixed;
+                position: absolute;
                 top: 15px;
                 left: 20px;
                 z-index: 11;
+            }
+
+            .search-container input[type="text"] {
+                width: 150px;
+                /* Меньше ширина для устройств с маленьким экраном */
+            }
+
+            .top-panel .login-button {
+                /* Для вмятия кнопки входа при маленьких экранах, чтобы все элементы поместились на экране */
+                position: absolute;
+                right: 20px;
+                z-index: 10;
+            }
+
+            .search-container {
+                position: absolute;
+                /* Позиционировать поиск по центру при маленькой ширине */
+                left: 50%;
+                transform: translateX(-50%);
+                margin-right: 0;
+            }
+
+            .search-container button {
+                z-index: 12;
             }
 
             .sidebar {
@@ -434,6 +462,10 @@
                 z-index: 10;
                 width: 80%;
                 padding-top: 60px;
+            }
+
+            .sidebar.active-menu {
+                transform: translateX(0);
             }
 
             .player {
@@ -555,7 +587,7 @@
 
         function toggleSidebar() {
             var sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('active-menu'); // при каждом клике добавляем/убираем класс
+            sidebar.classList.toggle('active-menu');
         }
 
         /* Теперь нужно обеспечить, чтобы меню скрывалось при нажатии на элемент меню. */
