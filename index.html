@@ -654,31 +654,6 @@
             }
         });
 
-        function setVolume() {
-            // Получаем значение ползунка как число от 0 до 1
-            let volumeLevel = volumeSlider.value / 100;
-            // Обновляем громкость для активного трека или всех треков
-            audioPlayers.forEach(function (audio) {
-                audio.volume = volumeLevel;
-            });
-        }
-
-        // Добавляем событие input для ползунка громкости
-        volumeSlider.addEventListener('input', setVolume);
-
-        // Применим громкость сразу же при загрузке страницы, чтобы совпадать со значением слайдера
-        setVolume();
-
-        // Начальная установка громкости для всех треков
-        function setInitialVolume(volumeValue) {
-            // Установка начальной громкости для всех треков
-            for (let track of tracks) {
-                track.volume = volumeValue;
-            }
-        }
-
-        // Вызов функции setInitialVolume с начальным значением громкости
-        setInitialVolume(initialVolume);
     </script>
 </body>
 
