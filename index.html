@@ -467,6 +467,7 @@
                 transition: transform 0.3s ease-in-out;
                 z-index: 10;
                 width: 80%;
+                /* Добавлено дополнительное свойство */
                 padding-top: 60px;
             }
 
@@ -621,6 +622,24 @@
     </div>
 
     <script>
+        // Обработчик клика для бургерного меню
+        document.querySelector('.burger-menu-button').addEventListener('click', toggleSidebar);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Обработчик клика для бургерного меню
+            var burgerMenuButton = document.querySelector('.burger-menu-button');
+            if (burgerMenuButton) {
+                burgerMenuButton.addEventListener('click', toggleSidebar);
+            }
+        });
+
+        function toggleSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+            if (sidebar) {
+                sidebar.classList.toggle('active-menu');
+            }
+        }
+
         var currentTrackIndex = 0;
         var isPlaying = false;  // Новая переменная для хранения состояния воспроизведения
         var tracks = Array.from(document.querySelectorAll('.audio-player'));
@@ -651,21 +670,6 @@
             }
         }
 
-        function toggleSidebar() {
-            var sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('active-menu');
-        }
-
-        // Обработчик клика для бургерного меню
-        document.querySelector('.burger-menu-button').addEventListener('click', toggleSidebar);
-
-        document.addEventListener('DOMContentLoaded', function() {
-  var burgerMenuButton = document.querySelector('.burger-menu-button');
-  if (burgerMenuButton) {
-    burgerMenuButton.addEventListener('click', toggleSidebar);
-  }
-});
-
         /* Теперь нужно обеспечить, чтобы меню скрывалось при нажатии на элемент меню. */
         var sidebarLinks = document.querySelectorAll('.sidebar button');
         sidebarLinks.forEach(function (link) {
@@ -688,8 +692,6 @@
 
         // Затем используйте объявленные переменные в функциях
 
-        var currentTrackIndex = 0;
-        var tracks = document.querySelectorAll('.audio-player');
         var progressBar = document.querySelector('.progress-bar');
 
         function togglePlay() {
