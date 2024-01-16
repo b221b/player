@@ -412,21 +412,24 @@
         /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             .top-panel {
-        justify-content: flex-start; /* изменено на flex-start */
-        padding-right: 20px;
-        padding-left: 20px; /* добавлен отступ слева */
-    }
+                justify-content: flex-start;
+                /* изменено на flex-start */
+                padding-right: 20px;
+                padding-left: 20px;
+                /* добавлен отступ слева */
+            }
 
-    .top-panel .logo {
-        /* Удаляем настройки абсолютного позиционирования 
+            .top-panel .logo {
+                /* Удаляем настройки абсолютного позиционирования 
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
         padding-left: 0;
         */
-        z-index: 9;
-        margin: 0 15px; /* добавляем отступы слева и справа */
-    }
+                z-index: 9;
+                margin: 0 15px;
+                /* добавляем отступы слева и справа */
+            }
 
             .burger-menu-button {
                 display: block;
@@ -517,11 +520,13 @@
 
     <div class="sidebar">
         <button onclick="window.location.href = 'index.html'"><img src="shit/house2.png">Главная</button>
-        <button onclick="window.location.href = 'one.html'"><img src="shit/one2.png">Любимое</button>
-        <button onclick="window.location.href = 'new.html'"><img src="shit/new2.png">Поиск</button>
         <button onclick="window.location.href = 'profile.html'"><img src="shit/user2.png">Профиль</button>
-        <button onclick="window.location.href = 'chat.html'"><img src="shit/chat2.png">Сообщения</button>
         <button onclick="window.location.href = 'playlists.html'"><img src="shit/playlist2.png">Плейлисты</button>
+        <img src="shit/полоса4.png" alt="" width="100%">
+        <button onclick="window.location.href = 'new.html'"><img src="shit/new2.png">Поиск</button>
+        <button onclick="window.location.href = 'one.html'"><img src="shit/one2.png">Любимое</button>
+        <button onclick="window.location.href = 'chat.html'"><img src="shit/chat2.png">Сообщения</button>
+        <img src="shit/полоса4.png" alt="" width="100%">
         <!-- Дополнительные элементы в sidebar -->
         <h3>Ваша Библиотека</h3>
         <ul>
