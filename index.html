@@ -1,1 +1,685 @@
-123
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Музыкальный плеер</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #121212;
+            color: #fff;
+        }
+
+        .top-panel {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 60px;
+            background-color: #181818;
+            padding-right: 50px;
+        }
+
+        .search-container {
+            position: relative;
+            margin-right: 24px;
+        }
+
+        .search-container input[type="text"] {
+            width: 300px;
+            padding: 12px 24px 12px 48px;
+            border: 1px solid #535353;
+            background-color: #121212;
+            color: white;
+            border-radius: 500px;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .search-container input[type="text"]::placeholder {
+            color: #ccc;
+        }
+
+        .search-container button {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            color: #ccc;
+        }
+
+        .top-panel .login-button {
+            background-color: #1db954;
+            border: none;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 500px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .top-panel .login-button:hover {
+            background-color: #1ed760;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 60px;
+            /* Высота top-panel */
+            left: 0;
+            width: 230px;
+            /* Более широкая панель для большего количества контента */
+            height: 100vh;
+            background-color: #181818;
+            color: #b3b3b3;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar img {
+            height: 40px;
+        }
+
+        .sidebar button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            color: inherit;
+            padding: 10px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar button:hover {
+            color: #fff;
+        }
+
+        .sidebar button img {
+            margin-right: 20px;
+        }
+
+        .player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 60px);
+            margin-left: 230px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .player .cover-art {
+            width: 300px;
+            height: 300px;
+            background-color: #282828;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgb(0 0 0 / 50%);
+        }
+
+        .player .cover-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 50%;
+        }
+
+        .player .track-info {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .player .track-info .title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .player .track-info .artist {
+            font-size: 16px;
+            color: #b3b3b3;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            left: 0;
+            /* Отступа слева теперь нет, теперь панель будет начинаться с левого края экрана */
+            bottom: 0;
+            width: 100%;
+            /* Панель займёт всю ширину экрана */
+            height: 90px;
+            background-color: #181818;
+            padding: 0 30px;
+            /* Устанавливаем отступ справа и слева */
+            box-shadow: 0 -2px 4px rgb(0 0 0 / 50%);
+        }
+
+        .controls .left,
+        .controls .center,
+        .controls .right {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: 30px;
+        }
+
+        .controls .left {
+            left: 30px;
+        }
+
+        .controls .right {
+            right: 30px;
+        }
+
+        .controls button {
+            background: none;
+            border: none;
+            color: inherit;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .controls button:hover {
+            color: #1db954;
+        }
+
+        .controls .progress-bar {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100vw;
+            height: 4px;
+            background: #535353;
+            border-radius: 2px;
+            outline: none;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+
+        }
+
+        .controls .progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            /* Width of the slider handle */
+            height: 12px;
+            /* Height of the slider handle */
+            background: #1db954;
+            cursor: pointer;
+            /* Cursor on hover */
+            border-radius: 50%;
+        }
+
+        .controls .volume-bar {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100px;
+            /* Width of the volume slider */
+            height: 4px;
+            background: #535353;
+            border-radius: 2px;
+            outline: none;
+            position: absolute;
+            right: 30px;
+            /* Правый отступ контейнера громкости */
+            width: 100px;
+            /* Ширина ползунка громкости */
+        }
+
+        /* Контейнер громкости */
+        .controls .volume-container {
+            position: absolute;
+            right: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            /* Это выравнивает содержимое по правому краю */
+            padding-right: 30px;
+        }
+
+        .controls .volume-container button {
+            margin-right: 100px;
+            /* Расстояние между кнопкой и ползунком громкости */
+        }
+
+        .controls .volume-container input[type=range] {
+            display: none;
+            /* Скрываем по умолчанию, показываем по наведению */
+            /* Удалить position: absolute и связанные стили left и width */
+        }
+
+        .controls .volume-container:hover input[type=range] {
+            display: block;
+            /* Показываем ползунок при наведении */
+        }
+
+        .controls .volume-container input[type=range] {
+            display: none;
+        }
+
+        .controls .volume-container:hover input[type=range] {
+            display: block;
+            /* Показываем ползунок громкости при наведении */
+        }
+
+        .controls .volume-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #1db954;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .controls .progress-container {
+            position: absolute;
+            top: -10px;
+            width: 100%;
+            padding: 0;
+        }
+
+        /* Базовые стили заголовков и списков в sidebar */
+        .sidebar h3 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            /* Чтобы выровнять текст с кнопками */
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px 20px;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #282828;
+        }
+
+        .top-panel .logo {
+            flex-grow: 1;
+            /* Дает логотипу возможность занимать доступное пространство */
+            font-size: 24px;
+            /* Вы можете настроить размер шрифта по вашему усмотрению */
+            font-weight: 700;
+            /* Более жирный шрифт для имитации логотипа Spotify */
+            color: #1db954;
+            /* Зеленый цвет логотипа Spotify */
+            padding-left: 50px;
+            /* Отступ слева */
+        }
+
+        .controls .center {
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            /* Расстояние между элементами */
+        }
+
+        .track-current {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* Расстояние между иконкой и текстом трека */
+        }
+
+        .track-current-img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .track-current-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .track-current-title,
+        .track-current-artist {
+            line-height: 1;
+        }
+
+        .track-action-like,
+        .track-action-add,
+        .track-action-share {
+            background: none;
+            border: none;
+            color: #ccc;
+            font-size: 16px;
+            padding: 5px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .track-action-like:hover,
+        .track-action-add:hover,
+        .track-action-share:hover {
+            color: #fff;
+            /* Белый цвет при наведении */
+        }
+
+        /* Стили для раздельного отображения элементов на мобильных устройствах или малых экранах */
+        @media (max-width: 768px) {
+            .track-current {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .track-current-info {
+                align-items: center;
+            }
+
+            .controls .center {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-panel">
+        <div class="logo">
+            Sportify
+        </div>
+        <div class="search-container">
+            <button onclick="toggleSearch()">🔍</button>
+            <input id="search-input" type="text" placeholder="Поиск...">
+        </div>
+        <button class="login-button">Войти</button>
+    </div>
+
+    <div class="sidebar">
+        <button onclick="window.location.href = 'index.html'"><img src="shit/house2.png">Главная</button>
+        <button onclick="window.location.href = 'one.html'"><img src="shit/one2.png">Любимое</button>
+        <button onclick="window.location.href = 'new.html'"><img src="shit/new2.png">Поиск</button>
+        <button onclick="window.location.href = 'profile.html'"><img src="shit/user2.png">Профиль</button>
+        <button onclick="window.location.href = 'chat.html'"><img src="shit/chat2.png">Сообщения</button>
+        <button onclick="window.location.href = 'playlists.html'"><img src="shit/playlist2.png">Плейлисты</button>
+        <!-- Дополнительные элементы в sidebar -->
+        <h3>Ваша Библиотека</h3>
+        <ul>
+            <li>Созданные плейлисты</li>
+            <li>Понравившиеся песни</li>
+            <li>Альбомы</li>
+            <li>Исполнители</li>
+            <li>Подкасты</li>
+        </ul>
+    </div>
+
+    <div class="player">
+        <div class="cover-art">
+            <!-- Вставьте путь к изображению обложки альбома -->
+            <img src="shit/satoru.jpg" alt="Обложка альбома" />
+        </div>
+        <div class="track-info">
+            <div class="title">Название трека</div>
+            <div class="artist">Исполнитель</div>
+        </div>
+    </div>
+
+    <audio class="audio-player" src="tracks/1.mp3" hidden></audio>
+    <audio class="audio-player" src="tracks/2.mp3" hidden></audio>
+    <audio class="audio-player" src="tracks/3.mp3" hidden></audio>
+    <audio class="audio-player" src="tracks/4.mp3" hidden></audio>
+    <audio class="audio-player" src="tracks/5.mp3" hidden></audio>
+    <audio class="audio-player" src="tracks/6.mp3" hidden></audio>
+    <audio class="audio-player" src="tracks/7.mp3" hidden></audio>
+    <audio class="audio-player" src="tracks/8.mp3" hidden></audio>
+    <audio class="audio-player" src="tracks/9.mp3" hidden></audio>
+
+    <div class="controls">
+        <div class="left">
+            <button onclick="prevTrack()">⏮</button>
+            <button onclick="togglePlay()">▶️</button>
+            <button onclick="nextTrack()">⏭</button>
+        </div>
+        <div class="progress-container">
+            <input type="range" class="progress-bar" value="0" step="1" min="0" max="100">
+        </div>
+        <div class="center">
+            <div class="track-current">
+                <img class="track-current-img" src="shit/satoru.jpg" alt="Иконка трека" />
+                <!-- Путь к иконке альбома -->
+                <div class="track-current-info">
+                    <span class="track-current-title">Название трека</span>
+                    <span class="track-current-artist">Исполнитель</span>
+                </div>
+            </div>
+            <button class="track-action-like">❤️</button> <!-- Иконка лайка -->
+            <button class="track-action-add">➕</button> <!-- Иконка добавления в плейлист -->
+            <button class="track-action-share">📤</button> <!-- Иконка поделиться -->
+        </div>
+        <div class="volume-container">
+            <button onclick="toggleVolumeSlider()">🔊</button>
+            <input type="range" class="volume-bar" value="100" min="0" max="100">
+        </div>
+    </div>
+
+    <script>
+        // Добавьте необходимую логику обработчиков событий
+        function toggleSearch() {
+            var searchInput = document.getElementById('search-input');
+            // ... Остальная логика toggleSearch
+        }
+
+        function muteUnmute() {
+            // ... Остальная логика muteUnmute
+        }
+        function showVolumeSlider() {
+            document.querySelector('.volume-bar').style.display = 'block';
+        }
+
+        function hideVolumeSlider() {
+            document.querySelector('.volume-bar').style.display = 'none';
+        }
+        function toggleVolumeSlider() {
+            var volumeBar = document.querySelector('.controls .volume-container input[type=range]');
+            if (volumeBar.style.display === '' || volumeBar.style.display === 'none') {
+                volumeBar.style.display = 'block';
+            } else {
+                volumeBar.style.display = 'none';
+            }
+        }
+
+        // Получение элемента audio
+        var audioPlayers = document.querySelectorAll('.audio-player');
+
+        var currentTrackIndex = 0;
+        var tracks = document.querySelectorAll('.audio-player');
+        var progressBar = document.querySelector('.progress-bar');
+
+        function togglePlay() {
+            if (tracks[currentTrackIndex].paused) {
+                playTrack(currentTrackIndex);
+            } else {
+                tracks[currentTrackIndex].pause();
+            }
+            // Также переключим иконку воспроизведения/паузы
+            updatePlayPauseButton();
+        }
+
+        function prevTrack() {
+            // Останавливаем текущий трек и сбрасываем время
+            tracks[currentTrackIndex].pause();
+            tracks[currentTrackIndex].currentTime = 0;
+
+            // Отнимаем 1 от индекса, чтобы вернуться к предыдущему треку
+            // Если мы на первом треке, переходим к последнему
+            currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+
+            // Воспроизводим предыдущий трек
+            playTrack(currentTrackIndex);
+        }
+
+        function nextTrack() {
+            // Останавливаем текущий трек
+            tracks[currentTrackIndex].pause();
+            tracks[currentTrackIndex].currentTime = 0;
+
+            // Увеличиваем индекс на 1, чтобы перейти к следующему треку
+            // Используем модульное сложение, чтобы вернуться к первому треку после последнего
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+
+            // Воспроизводим следующий трек
+            playTrack(currentTrackIndex);
+        }
+
+
+
+        // Функция, которая меняет трек 
+        function changeTrack(trackPath) {
+            audioPlayer.src = trackPath;
+            togglePlay(); // Начинаем воспроизведение
+        }
+
+        // Обновите функцию обработчика событий progress bar для настройки времени воспроизведения
+        document.querySelector('.progress-bar').addEventListener('input', function (e) {
+            var duration = audioPlayer.duration;
+            if (duration > 0) {
+                var value = e.target.value;
+                var currentTime = (duration * value) / 100;
+                audioPlayer.currentTime = currentTime;
+            }
+        });
+
+        audioPlayer.addEventListener('timeupdate', function () {
+            var progressBar = document.querySelector('.progress-bar');
+            var value = (100 / audioPlayer.duration) * audioPlayer.currentTime;
+            progressBar.value = value;
+        });
+
+        // Получаем элемент ползунка громкости
+        var volumeSlider = document.querySelector('.volume-bar');
+
+        // Установка начальной громкости
+        var initialVolume = 0.5; // 50% громкости
+        tracks.forEach(function (track) {
+            track.volume = initialVolume;
+        });
+        volumeSlider.value = initialVolume * 100;
+
+        var currentTrackNumber = 1;
+        var totalTracks = 9; // Укажите общее количество треков
+
+        function playTrack(index) {
+            // остановить все треки и сбросить текущее время
+            tracks.forEach(function (track) {
+                track.pause();
+                track.currentTime = 0;
+            });
+
+            // Обновляем текущий индекс трека
+            currentTrackIndex = index;
+
+            // Воспроизводим выбранный трек
+            tracks[currentTrackIndex].play();
+
+            // Обновляем информацию о треке и прогресс-бар
+            updateTrackInfo(currentTrackIndex);
+            updateProgressBar(currentTrackIndex);
+        }
+
+        // Обновляем информацию о текущем треке
+        function updateTrackInfo(index) {
+            var trackInfoTitle = document.querySelector('.track-current-title');
+            var trackInfoArtist = document.querySelector('.track-current-artist');
+            var trackInfoImage = document.querySelector('.track-current-img');
+
+            // Пример получения информации о треке по его индексу
+            // Эти данные могут быть загружены из файла плейлиста или настроены вручную
+            var title = 'Трек ' + (index + 1); // Получаем название трека
+            var artist = 'Исполнитель ' + (index + 1); // Получаем исполнителя
+
+            trackInfoTitle.textContent = title;
+            trackInfoArtist.textContent = artist;
+            trackInfoImage.src = "path-to-image-for-track.jpg"; // Установить путь к изображению трека
+        }
+
+        // Обновляем прогресс-бар при воспроизведении трека
+        function updateProgressBar(index) {
+            var track = tracks[currentTrackIndex];
+
+            track.addEventListener('timeupdate', function () {
+                var value = (100 / track.duration) * track.currentTime;
+                progressBar.value = value;
+            });
+        }
+
+        // Добавляем события на progressBar
+        progressBar.addEventListener('input', function (e) {
+            var track = tracks[currentTrackIndex];
+            if (track.duration > 0) {
+                var value = e.target.value;
+                track.currentTime = (track.duration * value) / 100;
+            }
+        });
+
+        function setVolume() {
+            // Получаем значение ползунка как число от 0 до 1
+            let volumeLevel = volumeSlider.value / 100;
+            // Обновляем громкость для активного трека или всех треков
+            audioPlayers.forEach(function (audio) {
+                audio.volume = volumeLevel;
+            });
+        }
+
+        // Добавляем событие input для ползунка громкости
+        volumeSlider.addEventListener('input', setVolume);
+
+        // Применим громкость сразу же при загрузке страницы, чтобы совпадать со значением слайдера
+        setVolume();
+
+        // Начальная установка громкости для всех треков
+        function setInitialVolume(volumeValue) {
+            // Установка начальной громкости для всех треков
+            for (let track of tracks) {
+                track.volume = volumeValue;
+            }
+        }
+
+        // Вызов функции setInitialVolume с начальным значением громкости
+        setInitialVolume(initialVolume);
+    </script>
+</body>
+
+</html>
