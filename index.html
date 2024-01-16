@@ -408,27 +408,16 @@
             transform: translateX(0);
         }
 
-        /* Стили для раздельного отображения элементов на мобильных устройствах или малых экранах */
-        /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             .top-panel {
                 justify-content: flex-start;
-                /* изменено на flex-start */
                 padding-right: 20px;
                 padding-left: 20px;
-                /* добавлен отступ слева */
             }
 
             .top-panel .logo {
-                /* Удаляем настройки абсолютного позиционирования 
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        padding-left: 0;
-        */
                 z-index: 9;
                 margin: 0 15px;
-                /* добавляем отступы слева и справа */
             }
 
             .burger-menu-button {
@@ -441,11 +430,9 @@
 
             .search-container input[type="text"] {
                 width: 150px;
-                /* Меньше ширина для устройств с маленьким экраном */
             }
 
             .top-panel .login-button {
-                /* Для вмятия кнопки входа при маленьких экранах, чтобы все элементы поместились на экране */
                 position: absolute;
                 right: 50px;
                 z-index: 10;
@@ -453,7 +440,6 @@
 
             .search-container {
                 position: absolute;
-                /* Позиционировать поиск по центру при маленькой ширине */
                 left: 50%;
                 transform: translateX(-50%);
                 margin-right: 0;
@@ -485,7 +471,7 @@
 
             .controls .left,
             .controls .right {
-                display: none;
+                display: flex;
             }
 
             .controls .center {
@@ -493,13 +479,32 @@
                 bottom: 0;
                 left: 0;
                 transform: none;
-                flex-direction: row;
-                justify-content: space-between;
+                justify-content: center;
+                position: relative;
+            }
+
+            .controls .volume-container,
+            .controls .track-action-like,
+            .controls .track-action-add,
+            .controls .track-action-share,
+            .volume-slider {
+                display: none;
+                /* Скрываем эти контролы на мобильных устройствах */
+            }
+
+            .controls button {
+                margin: 0 10px;
+                /* Меньше места между кнопками управления */
+            }
+
+            .progress-bar {
+                width: 100%;
+                /* Прогресс-бар на всю ширину контейнера */
             }
 
             .track-current {
                 display: none;
-                /* Или сделайте компактнее, если хотите оставить */
+                /* Скрыть информацию о текущем треке также на мобильных устройствах */
             }
         }
     </style>
@@ -564,6 +569,7 @@
             <button onclick="prevTrack()">⏮</button>
             <button onclick="togglePlay()">▶️</button>
             <button onclick="nextTrack()">⏭</button>
+            <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
         </div>
 
         <div class="progress-container">
@@ -593,6 +599,23 @@
     </div>
 
     <script>
+
+        function formatTime(seconds) {
+            var minute = Math.floor(seconds / 60);
+            var secondLeft = Math.floor(seconds - minute * 60);
+            return `${minute}:${(secondLeft < 10 ? '0' : '') + secondLeft}`;
+        }
+
+        function updateTimeDisplay() {
+            var currentTimeDisplay = document.querySelector('.current-time');
+            var durationDisplay = document.querySelector('.duration-time');
+            var currentTrack = tracks[currentTrackIndex];
+
+            if (currentTrack.duration) {
+                currentTimeDisplay.textContent = formatTime(currentTrack.currentTime);
+                durationDisplay.textContent = formatTime(currentTrack.duration);
+            }
+        }
 
         function toggleSidebar() {
             var sidebar = document.querySelector('.sidebar');
@@ -702,6 +725,12 @@
             // Обновляем информацию о треке и прогресс-бар
             updateTrackInfo(currentTrackIndex);
             updateProgressBar(currentTrackIndex);
+
+            tracks[currentTrackIndex].onloadedmetadata = function () {
+                // Обновите отображение продолжительности трека при загрузке метаданных
+                updateTimeDisplay();
+            };
+
         }
 
         // Обновляем информацию о текущем треке
@@ -727,6 +756,9 @@
             track.addEventListener('timeupdate', function () {
                 var value = (100 / track.duration) * track.currentTime;
                 progressBar.value = value;
+
+                // Обновляем отображаемое время
+                updateTimeDisplay();
             });
         }
 
