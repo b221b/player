@@ -659,13 +659,6 @@
         // Обработчик клика для бургерного меню
         document.querySelector('.burger-menu-button').addEventListener('click', toggleSidebar);
 
-        document.addEventListener('DOMContentLoaded', function() {
-  var burgerMenuButton = document.querySelector('.burger-menu-button');
-  if (burgerMenuButton) {
-    burgerMenuButton.addEventListener('click', toggleSidebar);
-  }
-});
-
         /* Теперь нужно обеспечить, чтобы меню скрывалось при нажатии на элемент меню. */
         var sidebarLinks = document.querySelectorAll('.sidebar button');
         sidebarLinks.forEach(function (link) {
