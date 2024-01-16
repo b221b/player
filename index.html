@@ -412,17 +412,21 @@
         /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             .top-panel {
-                justify-content: center;
-                padding-right: 20px;
-            }
+        justify-content: flex-start; /* изменено на flex-start */
+        padding-right: 20px;
+        padding-left: 20px; /* добавлен отступ слева */
+    }
 
-            .top-panel .logo {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                padding-left: 0;
-                z-index: 9;
-            }
+    .top-panel .logo {
+        /* Удаляем настройки абсолютного позиционирования 
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        padding-left: 0;
+        */
+        z-index: 9;
+        margin: 0 15px; /* добавляем отступы слева и справа */
+    }
 
             .burger-menu-button {
                 display: block;
@@ -504,10 +508,10 @@
             Sportify
         </div>
         <div class="burger-menu-button" onclick="toggleSidebar()">☰</div>
-        <div class="search-container">
+        <!-- <div class="search-container">
             <button onclick="toggleSearch()">🔍</button>
             <input id="search-input" type="text" placeholder="Поиск...">
-        </div>
+        </div> -->
         <button class="login-button">Войти</button>
     </div>
 
