@@ -14,6 +14,11 @@ html {
     height: 60px;
     background-color: #181818;
     padding-right: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 98%;
+    z-index: 10;
 }
 
 .search-container {
@@ -199,15 +204,16 @@ html {
 
 .controls .progress-bar {
     -webkit-appearance: none;
-    /* Override default CSS styles */
     appearance: none;
-    width: 500px;
-    /* Width of the progress bar */
+    width: 100vw;
     height: 4px;
-    /* Specified height */
     background: #535353;
     border-radius: 2px;
     outline: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
 }
 
 .controls .progress-bar::-webkit-slider-thumb {
@@ -223,49 +229,28 @@ html {
     border-radius: 50%;
 }
 
-.controls .volume-bar {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100px;
-    /* Width of the volume slider */
-    height: 4px;
-    background: #535353;
-    border-radius: 2px;
-    outline: none;
-}
-
 /* Контейнер громкости */
 .controls .volume-container {
-    position: relative;
+    position: absolute;
+    right: 0;
     display: flex;
     align-items: center;
 }
 
-.controls .volume-container input[type=range] {
-    display: none;
-    /* Скрываем ползунок громкости по умолчанию */
-}
-
-.controls .volume-container:hover input[type=range] {
-    display: block;
-    /* Показываем ползунок громкости при наведении */
-}
-
-.controls .volume-bar::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    background: #1db954;
-    cursor: pointer;
-    border-radius: 50%;
+.volume-container {
+    display: flex;
+    align-items: center;
+    /* Это выравнивает содержимое по правому краю */
+    padding-right: 30px;
+    position: relative;
+    /* Это нам нужно, чтобы корректно позиционировать ползунок */
 }
 
 .controls .progress-container {
     position: absolute;
-    top: 0;
+    top: -10px;
     width: 100%;
-    padding: 0 30px;
+    padding: 0;
 }
 
 /* Базовые стили заголовков и списков в sidebar */
@@ -302,4 +287,233 @@ html {
     /* Зеленый цвет логотипа Spotify */
     padding-left: 50px;
     /* Отступ слева */
+}
+
+.controls .center {
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Расстояние между элементами */
+}
+
+.track-current {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Расстояние между иконкой и текстом трека */
+}
+
+.track-current-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.track-current-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.track-current-title,
+.track-current-artist {
+    line-height: 1;
+}
+
+.track-action-like,
+.track-action-add,
+.track-action-share {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.track-action-like:hover,
+.track-action-add:hover,
+.track-action-share:hover {
+    color: #fff;
+    /* Белый цвет при наведении */
+}
+
+.volume-slider {
+    width: 100px;
+    /* Можно настроить */
+    margin-left: 12px;
+    /* Отступ слева от иконки */
+}
+
+/* Стиль для ползунка громкости */
+.controls .volume-slider {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 4px;
+    border-radius: 2px;
+    background: #535353;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.controls .volume-slider:hover {
+    opacity: 1;
+}
+
+.controls .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #1db954;
+    cursor: pointer;
+}
+
+.controls .volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background: #1db954;
+    cursor: pointer;
+}
+
+/* Бургерное меню стили */
+.burger-menu-button {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Стиль для активного меню */
+.active-menu {
+    transform: translateX(0);
+}
+
+
+
+/* --------------------------------------------- */
+/* --------------------------------------------- */
+/* --------------------------------------------- */
+
+
+
+@media (max-width: 768px) {
+    .top-panel {
+        justify-content: flex-start;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .top-panel .search-container,
+    .sidebar {
+        display: none;
+    }
+
+    .top-panel .logo {
+        z-index: 9;
+        margin: 0 15px;
+    }
+
+    .burger-menu-button {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        z-index: 11;
+    }
+
+    .search-container input[type="text"] {
+        width: 150px;
+    }
+
+    .top-panel .login-button {
+        position: absolute;
+        right: 50px;
+        z-index: 10;
+    }
+
+    .search-container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-right: 0;
+    }
+
+    .search-container button {
+        z-index: 12;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 10;
+        width: 80%;
+        padding-top: 60px;
+    }
+
+    .sidebar.active-menu {
+        transform: translateX(0);
+    }
+
+    .player {
+        margin-left: 0;
+    }
+
+    .controls {
+        padding: 0 20px;
+    }
+
+    .controls .center {
+        gap: 10px;
+        justify-content: space-around;
+        padding: 0;
+        width: 100%;
+        position: relative;
+        left: unset;
+        transform: unset;
+    }
+
+    .controls .playback-controls {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .controls .volume-slider,
+    .controls .volume-container,
+    .controls .track-action-like,
+    .controls .track-action-add,
+    .controls .track-action-share,
+    .controls button[onclick="toggleMute()"] {
+        display: none;
+    }
+
+    .controls .playback-status {
+        position: static;
+        flex-grow: 1;
+    }
+
+    .controls button {
+        font-size: 22px;
+        /* Увеличиваем размер иконок */
+        padding: 5px 12px;
+        /* Увеличиваем область вокруг иконки */
+    }
+
+
+    .progress-bar {
+        width: 100%;
+    }
+
+    .track-current {
+        transform: translateX(110px) translateY(30px);
+    }
+
 }

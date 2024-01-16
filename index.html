@@ -408,11 +408,24 @@
             transform: translateX(0);
         }
 
+
+
+        /* --------------------------------------------- */
+        /* --------------------------------------------- */
+        /* --------------------------------------------- */
+
+
+
         @media (max-width: 768px) {
             .top-panel {
                 justify-content: flex-start;
                 padding-right: 20px;
                 padding-left: 20px;
+            }
+
+            .top-panel .search-container,
+            .sidebar {
+                display: none;
             }
 
             .top-panel .logo {
@@ -469,43 +482,52 @@
                 padding: 0 20px;
             }
 
-            .controls .left,
-            .controls .right {
-                display: flex;
-            }
-
             .controls .center {
+                gap: 10px;
+                justify-content: space-around;
+                padding: 0;
                 width: 100%;
-                bottom: 0;
-                left: 0;
-                transform: none;
-                justify-content: center;
                 position: relative;
+                left: unset;
+                transform: unset;
             }
 
+            .controls .playback-controls {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .controls .volume-slider,
             .controls .volume-container,
             .controls .track-action-like,
             .controls .track-action-add,
             .controls .track-action-share,
-            .volume-slider {
+            .controls button[onclick="toggleMute()"] {
                 display: none;
-                /* Скрываем эти контролы на мобильных устройствах */
+            }
+
+            .controls .playback-status {
+                position: static;
+                flex-grow: 1;
             }
 
             .controls button {
-                margin: 0 10px;
-                /* Меньше места между кнопками управления */
+                font-size: 22px;
+                /* Увеличиваем размер иконок */
+                padding: 5px 12px;
+                /* Увеличиваем область вокруг иконки */
             }
+
 
             .progress-bar {
                 width: 100%;
-                /* Прогресс-бар на всю ширину контейнера */
             }
 
             .track-current {
-                display: none;
-                /* Скрыть информацию о текущем треке также на мобильных устройствах */
+                transform: translateX(110px) translateY(30px);
             }
+
         }
     </style>
 </head>
@@ -599,6 +621,18 @@
     </div>
 
     <script>
+        var currentTrackIndex = 0;
+        var isPlaying = false;  // Новая переменная для хранения состояния воспроизведения
+        var tracks = Array.from(document.querySelectorAll('.audio-player'));
+
+        function resetTracks() {
+            tracks.forEach(function (track, index) {
+                if (index !== currentTrackIndex) {
+                    track.pause();
+                    track.currentTime = 0;
+                }
+            });
+        }
 
         function formatTime(seconds) {
             var minute = Math.floor(seconds / 60);
