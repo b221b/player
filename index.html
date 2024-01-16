@@ -26,6 +26,11 @@
             height: 60px;
             background-color: #181818;
             padding-right: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 98%;
+            z-index: 10;
         }
 
         .search-container {
@@ -236,22 +241,6 @@
             border-radius: 50%;
         }
 
-        .controls .volume-bar {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100px;
-            /* Width of the volume slider */
-            height: 4px;
-            background: #535353;
-            border-radius: 2px;
-            outline: none;
-            position: absolute;
-            right: 30px;
-            /* Правый отступ контейнера громкости */
-            width: 100px;
-            /* Ширина ползунка громкости */
-        }
-
         /* Контейнер громкости */
         .controls .volume-container {
             position: absolute;
@@ -263,44 +252,10 @@
         .volume-container {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
             /* Это выравнивает содержимое по правому краю */
             padding-right: 30px;
-        }
-
-        .controls .volume-container button {
-            margin-right: 100px;
-            /* Расстояние между кнопкой и ползунком громкости */
-        }
-
-        .controls .volume-container input[type=range] {
-            display: none;
-            /* Скрываем по умолчанию, показываем по наведению */
-            /* Удалить position: absolute и связанные стили left и width */
-        }
-
-        .controls .volume-container:hover input[type=range] {
-            display: block;
-            /* Показываем ползунок при наведении */
-        }
-
-        .controls .volume-container input[type=range] {
-            display: none;
-        }
-
-        .controls .volume-container:hover input[type=range] {
-            display: block;
-            /* Показываем ползунок громкости при наведении */
-        }
-
-        .controls .volume-bar::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 12px;
-            height: 12px;
-            background: #1db954;
-            cursor: pointer;
-            border-radius: 50%;
+            position: relative;
+            /* Это нам нужно, чтобы корректно позиционировать ползунок */
         }
 
         .controls .progress-container {
@@ -398,19 +353,114 @@
             /* Белый цвет при наведении */
         }
 
+        .volume-slider {
+            width: 100px;
+            /* Можно настроить */
+            margin-left: 12px;
+            /* Отступ слева от иконки */
+        }
+
+        /* Стиль для ползунка громкости */
+        .controls .volume-slider {
+            -webkit-appearance: none;
+            width: 100px;
+            height: 4px;
+            border-radius: 2px;
+            background: #535353;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .controls .volume-slider:hover {
+            opacity: 1;
+        }
+
+        .controls .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #1db954;
+            cursor: pointer;
+        }
+
+        .controls .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border: none;
+            border-radius: 50%;
+            background: #1db954;
+            cursor: pointer;
+        }
+
+        /* Бургерное меню стили */
+        .burger-menu-button {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Стиль для активного меню */
+        .active-menu {
+            transform: translateX(0);
+        }
+
         /* Стили для раздельного отображения элементов на мобильных устройствах или малых экранах */
+        /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
-            .track-current {
-                flex-direction: column;
-                align-items: center;
+            .top-panel {
+                justify-content: space-between;
+                padding-right: 20px;
             }
 
-            .track-current-info {
-                align-items: center;
+            .top-panel .logo {
+                padding-left: 20px;
+            }
+
+            .burger-menu-button {
+                display: block;
+                position: fixed;
+                top: 15px;
+                left: 20px;
+                z-index: 11;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 10;
+                width: 80%;
+                padding-top: 60px;
+            }
+
+            .player {
+                margin-left: 0;
+            }
+
+            .controls {
+                padding: 0 20px;
+            }
+
+            .controls .left,
+            .controls .right {
+                display: none;
             }
 
             .controls .center {
-                flex-direction: column;
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                transform: none;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .track-current {
+                display: none;
+                /* Или сделайте компактнее, если хотите оставить */
             }
         }
     </style>
@@ -421,6 +471,7 @@
         <div class="logo">
             Sportify
         </div>
+        <div class="burger-menu-button" onclick="toggleSidebar()">☰</div>
         <div class="search-container">
             <button onclick="toggleSearch()">🔍</button>
             <input id="search-input" type="text" placeholder="Поиск...">
@@ -473,29 +524,48 @@
             <button onclick="togglePlay()">▶️</button>
             <button onclick="nextTrack()">⏭</button>
         </div>
+
         <div class="progress-container">
             <input type="range" class="progress-bar" value="0" step="1" min="0" max="100">
         </div>
+
         <div class="center">
             <div class="track-current">
                 <img class="track-current-img" src="shit/satoru.jpg" alt="Иконка трека" />
-                <!-- Путь к иконке альбома -->
                 <div class="track-current-info">
                     <span class="track-current-title">Название трека</span>
                     <span class="track-current-artist">Исполнитель</span>
                 </div>
             </div>
-            <button class="track-action-like">❤️</button> <!-- Иконка лайка -->
-            <button class="track-action-add">➕</button> <!-- Иконка добавления в плейлист -->
-            <button class="track-action-share">📤</button> <!-- Иконка поделиться -->
+            <button class="track-action-like">❤️</button>
+            <button class="track-action-add">➕</button>
+            <!-- Непосредственно здесь вставляем ползунок громкости -->
+
+            <button class="track-action-share">📤</button>
+            <button onclick="toggleMute()">
+                🔊
+            </button>
+            <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.5"
+                title="Громкость">
         </div>
-        <div class="volume-container">
-            <button onclick="toggleVolumeSlider()">🔊</button>
-            <input type="range" class="volume-bar" value="100" min="0" max="100">
-        </div>
+
     </div>
 
     <script>
+
+        function toggleSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('active-menu'); // при каждом клике добавляем/убираем класс
+        }
+
+        /* Теперь нужно обеспечить, чтобы меню скрывалось при нажатии на элемент меню. */
+        var sidebarLinks = document.querySelectorAll('.sidebar button');
+        sidebarLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                var sidebar = document.querySelector('.sidebar');
+                sidebar.classList.remove('active-menu');
+            });
+        });
         // Добавьте необходимую логику обработчиков событий
         function toggleSearch() {
             var searchInput = document.getElementById('search-input');
@@ -505,24 +575,10 @@
         function muteUnmute() {
             // ... Остальная логика muteUnmute
         }
-        function showVolumeSlider() {
-            document.querySelector('.volume-bar').style.display = 'block';
-        }
 
-        function hideVolumeSlider() {
-            document.querySelector('.volume-bar').style.display = 'none';
-        }
-        function toggleVolumeSlider() {
-            var volumeBar = document.querySelector('.controls .volume-container input[type=range]');
-            if (volumeBar.style.display === '' || volumeBar.style.display === 'none') {
-                volumeBar.style.display = 'block';
-            } else {
-                volumeBar.style.display = 'none';
-            }
-        }
+        var audioPlayers = document.querySelectorAll('.audio-player'); // должно быть объявлено в начале
 
-        // Получение элемента audio
-        var audioPlayers = document.querySelectorAll('.audio-player');
+        // Затем используйте объявленные переменные в функциях
 
         var currentTrackIndex = 0;
         var tracks = document.querySelectorAll('.audio-player');
@@ -564,8 +620,6 @@
             playTrack(currentTrackIndex);
         }
 
-
-
         // Функция, которая меняет трек 
         function changeTrack(trackPath) {
             audioPlayer.src = trackPath;
@@ -587,16 +641,6 @@
             var value = (100 / audioPlayer.duration) * audioPlayer.currentTime;
             progressBar.value = value;
         });
-
-        // Получаем элемент ползунка громкости
-        var volumeSlider = document.querySelector('.volume-bar');
-
-        // Установка начальной громкости
-        var initialVolume = 0.5; // 50% громкости
-        tracks.forEach(function (track) {
-            track.volume = initialVolume;
-        });
-        volumeSlider.value = initialVolume * 100;
 
         var currentTrackNumber = 1;
         var totalTracks = 9; // Укажите общее количество треков
@@ -653,6 +697,35 @@
                 track.currentTime = (track.duration * value) / 100;
             }
         });
+
+        // Функция для регулировки громкости
+        function setVolume(volume) {
+            tracks.forEach(function (track) {
+                track.volume = volume;
+            });
+        }
+
+        // Обработчик событий для ползунка громкости, который будет вызывать функцию setVolume
+        document.getElementById('volume-slider').addEventListener('input', function (e) {
+            setVolume(e.target.value);
+        });
+
+        function toggleMute() {
+            var isMuted = tracks[currentTrackIndex].muted;
+            tracks[currentTrackIndex].muted = !isMuted;
+            // Обновите иконку звука в зависимости от состояния mute
+            var muteButton = document.querySelector('.center button');
+            muteButton.textContent = isMuted ? '🔊' : '🔇';
+        }
+
+        // Объявление setVolumeToHalf
+        function setVolumeToHalf() {
+            var audioPlayers = document.querySelectorAll('.audio-player');
+            audioPlayers.forEach(function (audio) {
+                audio.volume = 0.5; // 50% от максимального уровня
+            });
+        }
+
 
     </script>
 </body>
