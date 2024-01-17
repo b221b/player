@@ -535,34 +535,34 @@
         }
 
         .playlist-button {
-    display: block;
-    width: 20%;
-    background-color: #282828; /* Цвет фона кнопок */
-    border: none;
-    border-radius: 4px; /* Скругление углов */
-    overflow: hidden; /* Скрывает выходящие за границы элементы */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Тень под кнопкой */
-    transition: all 0.2s ease-in-out; /* Плавный переход для эффектов наведения и нажатия */
-    cursor: pointer; /* Курсор в виде руки, указывающий на кликабельный элемент */
-    text-align: center; /* Выравнивание текста по центру */
-    margin: 10px 0; /* Отступы сверху и снизу */
-}
+            display: block;
+            width: 20%;
+            background-color: #282828;
+            border: none;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            text-align: center;
+            margin: 10px 0;
+        }
 
-.playlist-button:hover {
-    background-color: #404040; /* Цвет фона при наведении */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Более заметная тень при наведении */
-    transform: translateY(-2px); /* Поднимает кнопку на 2px вверх при наведении */
-}
+        .playlist-button:hover {
+            background-color: #404040;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
 
-.playlist-item {
-    padding: 15px; /* Внутренние отступы вокруг контента */
-}
+        .playlist-item {
+            padding: 15px;
+        }
 
-.playlist-item h3 {
-    color: #fff; /* Цвет текста */
-    margin-top: 10px; /* Отступ сверху */
-    font-size: 1.1rem; /* Размер шрифта */
-}
+        .playlist-item h3 {
+            color: #fff;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
 
 
         /* --------------------------------------------- */
@@ -669,6 +669,30 @@
                 /* Поднятие выше других элементов */
                 color: #fff;
 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .user-playlists .playlist-item {
+                flex-basis: calc(50% - 20px);
+                /* Вместо 33.333% используем 50%, чтобы на мобильных устройствах было всего два элемента в строке */
+                margin: 10px;
+                /* Добавляем немного больше места между элементами */
+            }
+
+            .user-playlists .playlist-item h3 {
+                font-size: 1.2rem;
+                /* Увеличиваем размер шрифта названия плейлиста */
+            }
+
+            .user-playlists img {
+                height: auto;
+                /* Поддержка адаптивности изображений плейлиста */
+            }
+
+            .playlist-button {
+                padding: 15px;
+                /* Увеличиваем внутренние отступы для улучшения взаимодействия */
             }
         }
     </style>
