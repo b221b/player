@@ -79,6 +79,7 @@
             text-transform: uppercase;
             transition: background-color 0.3s ease;
             cursor: pointer;
+            margin-right: 3%;
         }
 
         .top-panel .login-button:hover {
@@ -89,7 +90,7 @@
             position: fixed;
             top: 60px;
             left: 0;
-            width: 230px;
+            width: 300px;
             height: 100vh;
             background-color: #181818;
             color: #b3b3b3;
@@ -137,7 +138,6 @@
             align-items: center;
             justify-content: center;
             height: calc(100vh - 60px);
-            margin-left: 230px;
             padding: 20px;
             position: relative;
         }
@@ -407,12 +407,8 @@
 
         /* Бургерное меню стили */
         .burger-menu-button {
-            display: block;
-            margin-right: 20px;
+            display: non;
             cursor: pointer;
-            font-size: 20px; /* Увеличение размера для большей видимости */
-    z-index: 100; /* Поднятие выше других элементов */
-    color: #fff;
         }
 
         /* Стиль для активного меню */
@@ -468,13 +464,11 @@
 
 
 
-            .player {
-                margin-left: 40%;
-            }
+
 
             .controls {
                 padding: 0 0px;
-                
+
             }
 
             .controls .center {
@@ -527,16 +521,19 @@
                 display: block;
                 z-index: 11;
                 /* Удостоверьтесь, что меню будет над остальными элементами */
-
+                display: block;
+                margin-right: 20px;
+                cursor: pointer;
+                font-size: 20px;
+                /* Увеличение размера для большей видимости */
+                z-index: 100;
+                /* Поднятие выше других элементов */
+                color: #fff;
 
             }
 
 
-            .player {
-                margin-left: 0;
-                padding-top: 60px;
-                /* Добавить отступ сверху вместо сдвига на ширину боковой панели */
-            }
+
 
         }
     </style>

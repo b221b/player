@@ -21,15 +21,18 @@
 
         .top-panel {
             display: flex;
-            justify-content: flex-end;
             align-items: center;
             height: 60px;
             background-color: #181818;
             padding-right: 50px;
+            /* Можете установить отступ по своему усмотрению */
+            padding-left: 20px;
+            /* Нужен отступ, если лого прилипает к краю */
             position: fixed;
             top: 0;
             left: 0;
-            width: 98%;
+            width: 100%;
+            /* Установите ширину на 100% */
             z-index: 10;
         }
 
@@ -76,6 +79,7 @@
             text-transform: uppercase;
             transition: background-color 0.3s ease;
             cursor: pointer;
+            margin-right: 3%;
         }
 
         .top-panel .login-button:hover {
@@ -85,15 +89,22 @@
         .sidebar {
             position: fixed;
             top: 60px;
-            /* Высота top-panel */
             left: 0;
-            width: 230px;
-            /* Более широкая панель для большего количества контента */
+            width: 300px;
             height: 100vh;
             background-color: #181818;
             color: #b3b3b3;
             padding: 20px;
             overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s;
+            z-index: 99;
+            bottom: 90px;
+        }
+
+        /* Стиль для сдвигания боковой панели внутрь экрана */
+        .active-menu {
+            transform: translateX(0);
         }
 
         .sidebar img {
@@ -127,7 +138,6 @@
             align-items: center;
             justify-content: center;
             height: calc(100vh - 60px);
-            margin-left: 230px;
             padding: 20px;
             position: relative;
         }
@@ -172,15 +182,14 @@
             justify-content: space-between;
             position: fixed;
             left: 0;
-            /* Отступа слева теперь нет, теперь панель будет начинаться с левого края экрана */
             bottom: 0;
             width: 100%;
-            /* Панель займёт всю ширину экрана */
             height: 90px;
             background-color: #181818;
             padding: 0 30px;
-            /* Устанавливаем отступ справа и слева */
             box-shadow: 0 -2px 4px rgb(0 0 0 / 50%);
+            z-index: 101;
+
         }
 
         .controls .left,
@@ -398,8 +407,7 @@
 
         /* Бургерное меню стили */
         .burger-menu-button {
-            display: none;
-            font-size: 24px;
+            display: non;
             cursor: pointer;
         }
 
@@ -418,19 +426,20 @@
 
         @media (max-width: 768px) {
             .top-panel {
-                justify-content: flex-start;
+                justify-content: space-between;
+                /* Изменено с flex-start на space-between */
                 padding-right: 20px;
                 padding-left: 20px;
             }
 
-            
+
 
             .top-panel .logo {
                 z-index: 9;
                 margin: 0 15px;
             }
 
-            
+
 
             .search-container input[type="text"] {
                 width: 150px;
@@ -453,14 +462,13 @@
                 z-index: 12;
             }
 
-            
 
-            .player {
-                margin-left: 40%;
-            }
+
+
 
             .controls {
                 padding: 0 0px;
+
             }
 
             .controls .center {
@@ -509,16 +517,32 @@
                 transform: translateX(110px) translateY(27px);
             }
 
+            .burger-menu-button {
+                display: block;
+                z-index: 11;
+                /* Удостоверьтесь, что меню будет над остальными элементами */
+                display: block;
+                margin-right: 20px;
+                cursor: pointer;
+                font-size: 20px;
+                /* Увеличение размера для большей видимости */
+                z-index: 100;
+                /* Поднятие выше других элементов */
+                color: #fff;
+
+            }
+
+
+
+
         }
     </style>
 </head>
 
 <body>
     <div class="top-panel">
-        <div class="logo">
-            Sportify
-        </div>
         <div class="burger-menu-button" onclick="toggleSidebar()">☰</div>
+        <div class="logo">Sportify</div>
         <!-- <div class="search-container">
             <button onclick="toggleSearch()">🔍</button>
             <input id="search-input" type="text" placeholder="Поиск...">
@@ -606,12 +630,23 @@
         document.querySelector('.burger-menu-button').addEventListener('click', toggleSidebar);
 
         document.addEventListener('DOMContentLoaded', function () {
-            // Обработчик клика для бургерного меню
-            var burgerMenuButton = document.querySelector('.burger-menu-button');
-            if (burgerMenuButton) {
-                burgerMenuButton.addEventListener('click', toggleSidebar);
-            }
+            var burgerButton = document.querySelector('.burger-menu-button');
+            var sidebar = document.querySelector('.sidebar');
+
+            // Переключение видимости боковой панели
+            burgerButton.addEventListener('click', function () {
+                sidebar.classList.toggle('active-menu');
+            });
+
+            // Скрытие боковой панели при выборе пункта меню
+            var sidebarLinks = document.querySelectorAll('.sidebar button');
+            sidebarLinks.forEach(function (link) {
+                link.addEventListener('click', function () {
+                    sidebar.classList.remove('active-menu');
+                });
+            });
         });
+
 
         function toggleSidebar() {
             var sidebar = document.querySelector('.sidebar');
