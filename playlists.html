@@ -433,14 +433,13 @@
 
         .playlists-container {
             display: flex;
-            /* Используем Flexbox */
             flex-wrap: wrap;
-            /* Перенос элементов при нехватке места */
-            justify-content: center;
-            /* Выравнивание элементов по центру */
+            justify-content: center; /* Это выравнивает элементы в начале контейнера */
+        align-items: center;
             gap: 20px;
             /* Расстояние между элементами */
         }
+
 
         .profile-header {
             display: flex;
@@ -564,6 +563,7 @@
             font-size: 1.1rem;
         }
 
+        
 
         /* --------------------------------------------- */
         /* --------------------------------------------- */
@@ -674,8 +674,9 @@
 
         @media (max-width: 768px) {
             .user-playlists .playlist-item {
-                flex-basis: calc(50% - 20px);
-                /* Вместо 33.333% используем 50%, чтобы на мобильных устройствах было всего два элемента в строке */
+                flex-basis: calc(33.333% - 20px);
+                /* Минимальный размер элемента, исключая gap */
+                text-align: center;
                 margin: 10px;
                 /* Добавляем немного больше места между элементами */
             }
@@ -692,6 +693,9 @@
 
             .playlist-button {
                 padding: 15px;
+                display: block;
+        width: calc(40% - 10px); /* Вычитаем 10px, чтобы учесть margin */
+        /* margin: 5px; */
                 /* Увеличиваем внутренние отступы для улучшения взаимодействия */
             }
         }
