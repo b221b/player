@@ -371,7 +371,6 @@
 
         /* Стиль для ползунка громкости */
         .controls .volume-slider {
-            -webkit-appearance: none;
             width: 100px;
             height: 4px;
             border-radius: 2px;

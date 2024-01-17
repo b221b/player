@@ -415,6 +415,81 @@
             transform: translateX(0);
         }
 
+        /* Стили для блока профиля пользователя */
+        .profile-container {
+            margin-left: 300px;
+            /* Отступ с учетом ширины боковой панели */
+            padding: 20px;
+            position: relative;
+            top: 70px;
+            /* Высота верхней панели */
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-username {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .profile-info {
+            margin-top: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 10px;
+        }
+
+        .info-title {
+            font-weight: bold;
+            padding-right: 10px;
+        }
+
+        .info,
+        .info-title {
+            color: #fff;
+        }
+
+        .user-playlists,
+        .user-activity {
+            margin-top: 20px;
+        }
+
+        .user-playlists h2,
+        .user-activity h2 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        /* Стили списков в профиле */
+        .user-playlists ul,
+        .user-activity ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .user-playlists li,
+        .user-activity li {
+            color: #b3b3b3;
+            cursor: pointer;
+        }
+
+        .user-playlists li:hover,
+        .user-activity li:hover {
+            color: #fff;
+        }
 
 
         /* --------------------------------------------- */
@@ -431,14 +506,10 @@
                 padding-left: 20px;
             }
 
-
-
             .top-panel .logo {
                 z-index: 9;
                 margin: 0 15px;
             }
-
-
 
             .search-container input[type="text"] {
                 width: 150px;
@@ -460,10 +531,6 @@
             .search-container button {
                 z-index: 12;
             }
-
-
-
-
 
             .controls {
                 padding: 0 0px;
@@ -530,9 +597,19 @@
                 color: #fff;
 
             }
+        }
 
-
-
+        @media (max-width: 768px) {
+            .profile-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                margin-left: 0;
+                padding: 20px;
+                box-sizing: border-box;
+            }
 
         }
     </style>
@@ -584,21 +661,53 @@
     +--------------------- -->
 
     <!-- --------------------+
-    |     Плеер по центру    |
+    |         Профиль        |
     +--------------------- -->
-    <div class="player">
-        <div class="cover-art">
-            <!-- Вставьте путь к изображению обложки альбома -->
-            <img src="shit/logo/satoru.jpg" alt="Обложка альбома" />
+    <div class="profile-container">
+        <div class="profile-header">
+            <img class="profile-avatar" src="shit/profile.png" alt="Аватар пользователя">
+            <h1 class="profile-username">Имя пользователя</h1>
         </div>
-        <div class="track-info">
-            <div class="title">Название трека</div>
-            <div class="artist">Исполнитель</div>
+
+        <!-- Блок с информацией пользователя -->
+        <div class="profile-info">
+            <div class="info-item">
+                <span class="info-title">Электронная почта:</span>
+                <span class="info">user@example.com</span>
+            </div>
+            <div class="info-item">
+                <span class="info-title">Дата регистрации:</span>
+                <span class="info">01.01.2023</span>
+            </div>
+            <div class="info-item">
+                <span class="info-title">Страна:</span>
+                <span class="info">Россия</span>
+            </div>
+            <div class="info-item">
+                <span class="info-title">Подписка:</span>
+                <span class="info">Premium</span>
+            </div>
+        </div>
+
+        <!-- Плейлисты пользователя -->
+        <div class="user-playlists">
+            <h2>Плейлисты</h2>
+            <ul>
+                <li>Мой Первый Плейлист</li>
+                <!-- Дополнительные плейлисты -->
+            </ul>
+        </div>
+
+        <!-- Последняя активность -->
+        <div class="user-activity">
+            <h2>Последняя активность:</h2>
+            <p>Послушал "Песню1" 10 раз</p>
+            <!-- Дополнительная активность -->
         </div>
     </div>
 
     <!-- --------------------+
-    |     Плеер по центру    |
+    |         Профиль        |
     +--------------------- -->
 
     <!-- --------------------+
