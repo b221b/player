@@ -434,8 +434,9 @@
         .playlists-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* Это выравнивает элементы в начале контейнера */
-        align-items: center;
+            justify-content: center;
+            /* Это выравнивает элементы в начале контейнера */
+            align-items: center;
             gap: 20px;
             /* Расстояние между элементами */
         }
@@ -445,7 +446,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            margin-top: 10%;
+            margin-top: 15%;
         }
 
         .profile-avatar {
@@ -563,7 +564,7 @@
             font-size: 1.1rem;
         }
 
-        
+
 
         /* --------------------------------------------- */
         /* --------------------------------------------- */
@@ -694,8 +695,9 @@
             .playlist-button {
                 padding: 15px;
                 display: block;
-        width: calc(40% - 10px); /* Вычитаем 10px, чтобы учесть margin */
-        /* margin: 5px; */
+                width: calc(40% - 10px);
+                /* Вычитаем 10px, чтобы учесть margin */
+                /* margin: 5px; */
                 /* Увеличиваем внутренние отступы для улучшения взаимодействия */
             }
         }
@@ -762,30 +764,30 @@
             <div class="user-playlists">
                 <div class="playlists-container">
 
-                    <button class="playlist-button">
+                    <button class="playlist-button" onclick="location.href='playlist1.html';">
                         <div class="playlist-item">
                             <img src="shit/logo/satoru.jpg" alt="Обложка плейлиста 1">
                             <h3>Плейлист 1</h3>
                         </div>
                     </button>
 
-                    <button class="playlist-button">
+                    <button class="playlist-button" onclick="location.href='playlist2.html';">
                         <div class="playlist-item">
-                            <img src="shit/logo/satoru.jpg" alt="Обложка плейлиста 2">
+                            <img src="shit/logo/satoru.jpg" alt="Обложка плейлиста 1">
                             <h3>Плейлист 2</h3>
                         </div>
                     </button>
 
-                    <button class="playlist-button">
+                    <button class="playlist-button" onclick="location.href='playlist3.html';">
                         <div class="playlist-item">
-                            <img src="shit/logo/satoru.jpg" alt="Обложка плейлиста 3">
+                            <img src="shit/logo/satoru.jpg" alt="Обложка плейлиста 1">
                             <h3>Плейлист 3</h3>
                         </div>
                     </button>
 
-                    <button class="playlist-button">
+                    <button class="playlist-button" onclick="location.href='playlist4.html';">
                         <div class="playlist-item">
-                            <img src="shit/logo/satoru.jpg" alt="Обложка плейлиста 3">
+                            <img src="shit/logo/satoru.jpg" alt="Обложка плейлиста 1">
                             <h3>Плейлист 4</h3>
                         </div>
                     </button>
