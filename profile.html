@@ -611,6 +611,18 @@
                 box-sizing: border-box;
             }
 
+            .profile-header,
+            .profile-info,
+            .user-playlists,
+            .user-activity {
+                width: 100%;
+                /* Для выравнивания элементов в одну колонку */
+            }
+
+            .info-item {
+                justify-content: space-between;
+                /* Гарантирует отступ между заголовками и информацией */
+            }
         }
     </style>
 </head>
@@ -704,6 +716,7 @@
             <p>Послушал "Песню1" 10 раз</p>
             <!-- Дополнительная активность -->
         </div>
+
     </div>
 
     <!-- --------------------+
