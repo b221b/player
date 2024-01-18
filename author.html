@@ -541,8 +541,13 @@
              audio.pause(); // Pause all audio players
            });
         });
+
+        var audioPlayers = document.querySelectorAll('.audio-player');
+audioPlayers.forEach(function(audio) {
+  audio.muted = true;
+});
        </script>
-       
+
     <!-- --------------------+
     |     Верхняя панель     |
     +--------------------- -->
