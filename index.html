@@ -530,6 +530,15 @@
 </head>
 
 <body>
+    <script>
+        window.addEventListener('load', function() {
+           var audioPlayers = document.querySelectorAll('.audio-player');
+           audioPlayers.forEach(function(audio) {
+             audio.pause(); // Pause all audio players
+           });
+        });
+       </script>
+       
     <!-- --------------------+
     |     Верхняя панель     |
     +--------------------- -->
