@@ -198,11 +198,11 @@
             display: flex;
             align-items: center;
             position: absolute;
-            bottom: 30px;
+            bottom: 25px;
         }
 
         .controls .left {
-            left: 30px;
+            left: 40px;
         }
 
         .controls .right {
@@ -699,14 +699,20 @@
     |         музыка         |
     +--------------------- -->
 
-    <!-- --------------------+
+        <!-- --------------------+
     |     Нижняя панель      |
     +--------------------- -->
     <div class="controls">
         <div class="left">
-            <button onclick="prevTrack()">⏮</button>
+
+            <!-- <button onclick="prevTrack()">⏮</button>
             <button onclick="togglePlay()">▶️</button>
-            <button onclick="nextTrack()">⏭</button>
+            <button onclick="nextTrack()">⏭</button> -->
+
+            <button onclick="prevTrack()"><img src="shit/previous.png" width="18px"></button>
+            <button onclick="togglePlay()"><img src="shit/play.png" width="22px"></button>
+            <button onclick="nextTrack()"><img src="shit/next.png" width="18px"></button>
+
             <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
         </div>
 
@@ -716,22 +722,71 @@
 
         <div class="center">
             <div class="track-current">
-                <img class="track-current-img" src="shit/satoru.jpg" alt="Иконка трека" />
+                <!-- <img class="track-current-img" src="shit/logo/logo (5).jpg" alt="Иконка трека" /> -->
                 <div class="track-current-info">
                     <span class="track-current-title">Название трека</span>
                     <span class="track-current-artist">Исполнитель</span>
                 </div>
             </div>
-            <button class="track-action-like">❤️</button>
-            <button class="track-action-add">➕</button>
+
+            <!-- <button class="track-action-like" onclick="showNotification()">❤️</button> -->
+            <button class="track-action-like" onclick="showNotification()"><img src="shit/heart.png"
+                    width="18px"></button>
+            <script>
+                function showNotification() {
+                    alert('Трек добавлен в раздел «Треки» Коллекции');
+                }
+            </script>
+
+            <!-- <button class="track-action-add" onclick="showNotification2()">➕</button> -->
+            <button class="track-action-add" onclick="showNotification2()"><img src="shit/plus.png"
+                    width="18px"></button>
+            <script>
+                function showNotification2() {
+                    alert('Трек добавлен в Плейлист');
+                }
+            </script>
+
             <!-- Непосредственно здесь вставляем ползунок громкости -->
 
-            <button class="track-action-share">📤</button>
-            <button onclick="toggleMute()">
-                🔊
-            </button>
-            <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.5"
+            <!-- <button class="track-action-share" onclick="copyLink()">📤</button> -->
+            <button class="track-action-share" onclick="copyLink()"><img src="shit/share.png" width="18px"></button>
+            <script>
+                function copyLink() {
+                    var dummy = document.createElement('input');
+                    var url = window.location.href;
+                    document.body.appendChild(dummy);
+                    dummy.value = url;
+                    dummy.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(dummy);
+                    alert('Ссылка скопирована: ' + url);
+                }
+            </script>
+
+            <!-- <button onclick="toggleMute()">🔊</button> -->
+            <button onclick="toggleMute()"><img src="shit/volume.png" width="18px"></button>
+
+            <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.1"
                 title="Громкость">
+
+            <script>
+                document.getElementById("volume-slider").addEventListener("input", function () {
+                    var volume = this.value; // получаем значение ползунка
+                    var players = document.querySelectorAll(".audio-player"); // получаем все аудиоплееры
+
+                    players.forEach(function (player) {
+                        player.volume = volume; // устанавливаем громкость для каждого аудиоплеера
+                    });
+                });
+
+                // Установить громкость на 10% 
+                var audioPlayers = document.querySelectorAll('.audio-player');
+                audioPlayers.forEach(function (audio) {
+                    audio.volume = 0.1;
+                    audio.play();
+                });
+            </script>
         </div>
 
     </div>
