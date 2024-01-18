@@ -198,11 +198,11 @@
             display: flex;
             align-items: center;
             position: absolute;
-            bottom: 30px;
+            bottom: 25px;
         }
 
         .controls .left {
-            left: 30px;
+            left: 40px;
         }
 
         .controls .right {
@@ -522,10 +522,6 @@
                 color: #fff;
 
             }
-
-
-
-
         }
     </style>
 </head>
@@ -558,8 +554,6 @@
         <button onclick="window.location.href = 'playlists.html'"><img src="shit/playlist2.png">Плейлисты</button>
         <button onclick="window.location.href = 'video.html'"><img src="shit/видео.png">Видео</button>
         <img src="shit/полоса4.png" alt="" width="100%">
-        <button onclick="window.location.href = 'new.html'"><img src="shit/new2.png">Поиск</button>
-        <button onclick="window.location.href = 'one.html'"><img src="shit/one2.png">Любимое</button>
         <button onclick="window.location.href = 'chat.html'"><img src="shit/chat2.png">Сообщения</button>
         <button onclick="window.location.href = 'author.html'"><img src="shit/group.png">Авторы</button>
         <img src="shit/полоса4.png" alt="" width="100%">
@@ -583,7 +577,7 @@
     <div class="player">
         <div class="cover-art">
             <!-- <img src="shit/logo/satoru.jpg" alt="Обложка альбома" /> -->
-            <img src="shit/video/choso.gif" alt="Обложка альбома"/>
+            <img src="shit/logo/satoru2 (1).jpg" alt="Обложка альбома" />
         </div>
         <div class="track-info">
             <div class="title">Название трека</div>
@@ -598,15 +592,23 @@
     <!-- --------------------+
     |         музыка         |
     +--------------------- -->
-    <audio class="audio-player" src="tracks/1.test/1.mp3" hidden></audio>
-    <audio class="audio-player" src="tracks/1.test/2.mp3" hidden></audio>
-    <audio class="audio-player" src="tracks/1.test/3.mp3" hidden></audio>
-    <audio class="audio-player" src="tracks/1.test/4.mp3" hidden></audio>
-    <audio class="audio-player" src="tracks/1.test/5.mp3" hidden></audio>
-    <audio class="audio-player" src="tracks/1.test/6.mp3" hidden></audio>
-    <audio class="audio-player" src="tracks/1.test/7.mp3" hidden></audio>
-    <audio class="audio-player" src="tracks/1.test/8.mp3" hidden></audio>
-    <audio class="audio-player" src="tracks/1.test/9.mp3" hidden></audio>
+    <audio class="audio-player"
+        src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Blow (Official Audio) (128 kbps).mp3" hidden></audio>
+    <audio class="audio-player"
+        src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Delete (Official Audio) (128 kbps).mp3" hidden></audio>
+    <audio class="audio-player"
+        src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - GTG (Official Music Video) (128 kbps).mp3"
+        hidden></audio>
+    <audio class="audio-player"
+        src="tracks/2.freddie_dredd/Y2mate.mx - FREDDIE DREDD - KILLIN' ON DEMAND (PROD. RYAN C) (128 kbps).mp3"
+        hidden></audio>
+    <audio class="audio-player" src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Limbo (Lyrics) (128 kbps).mp3"
+        hidden></audio>
+    <audio class="audio-player"
+        src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Stunna (Official Audio) (128 kbps).mp3" hidden></audio>
+    <audio class="audio-player"
+        src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - WTH (Official Audio) (128 kbps).mp3" hidden></audio>
+    <audio class="audio-player" src="tracks/2.freddie_dredd/Y2mate.mx - Opaul (128 kbps).mp3" hidden></audio>
 
 
     <!-- --------------------+
@@ -618,9 +620,15 @@
     +--------------------- -->
     <div class="controls">
         <div class="left">
-            <button onclick="prevTrack()">⏮</button>
+
+            <!-- <button onclick="prevTrack()">⏮</button>
             <button onclick="togglePlay()">▶️</button>
-            <button onclick="nextTrack()">⏭</button>
+            <button onclick="nextTrack()">⏭</button> -->
+
+            <button onclick="prevTrack()"><img src="shit/previous.png" width="18px"></button>
+            <button onclick="togglePlay()"><img src="shit/play.png" width="22px"></button>
+            <button onclick="nextTrack()"><img src="shit/next.png" width="18px"></button>
+
             <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
         </div>
 
@@ -630,22 +638,71 @@
 
         <div class="center">
             <div class="track-current">
-                <img class="track-current-img" src="shit/satoru.jpg" alt="Иконка трека" />
+                <!-- <img class="track-current-img" src="shit/logo/logo (5).jpg" alt="Иконка трека" /> -->
                 <div class="track-current-info">
                     <span class="track-current-title">Название трека</span>
                     <span class="track-current-artist">Исполнитель</span>
                 </div>
             </div>
-            <button class="track-action-like">❤️</button>
-            <button class="track-action-add">➕</button>
+
+            <!-- <button class="track-action-like" onclick="showNotification()">❤️</button> -->
+            <button class="track-action-like" onclick="showNotification()"><img src="shit/heart.png"
+                    width="18px"></button>
+            <script>
+                function showNotification() {
+                    alert('Трек добавлен в раздел «Треки» Коллекции');
+                }
+            </script>
+
+            <!-- <button class="track-action-add" onclick="showNotification2()">➕</button> -->
+            <button class="track-action-add" onclick="showNotification2()"><img src="shit/plus.png"
+                    width="18px"></button>
+            <script>
+                function showNotification2() {
+                    alert('Трек добавлен в Плейлист');
+                }
+            </script>
+
             <!-- Непосредственно здесь вставляем ползунок громкости -->
 
-            <button class="track-action-share">📤</button>
-            <button onclick="toggleMute()">
-                🔊
-            </button>
-            <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.5"
+            <!-- <button class="track-action-share" onclick="copyLink()">📤</button> -->
+            <button class="track-action-share" onclick="copyLink()"><img src="shit/share.png" width="18px"></button>
+            <script>
+                function copyLink() {
+                    var dummy = document.createElement('input');
+                    var url = window.location.href;
+                    document.body.appendChild(dummy);
+                    dummy.value = url;
+                    dummy.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(dummy);
+                    alert('Ссылка скопирована: ' + url);
+                }
+            </script>
+
+            <!-- <button onclick="toggleMute()">🔊</button> -->
+            <button onclick="toggleMute()"><img src="shit/volume.png" width="18px"></button>
+
+            <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.1"
                 title="Громкость">
+
+            <script>
+                document.getElementById("volume-slider").addEventListener("input", function () {
+                    var volume = this.value; // получаем значение ползунка
+                    var players = document.querySelectorAll(".audio-player"); // получаем все аудиоплееры
+
+                    players.forEach(function (player) {
+                        player.volume = volume; // устанавливаем громкость для каждого аудиоплеера
+                    });
+                });
+
+                // Установить громкость на 50% (0.5) перед воспроизведением
+                var audioPlayers = document.querySelectorAll('.audio-player');
+                audioPlayers.forEach(function (audio) {
+                    audio.volume = 0.1;
+                    audio.play();
+                });
+            </script>
         </div>
 
     </div>
@@ -722,14 +779,9 @@
                 sidebar.classList.remove('active-menu');
             });
         });
-        // Добавьте необходимую логику обработчиков событий
+
         function toggleSearch() {
             var searchInput = document.getElementById('search-input');
-            // ... Остальная логика toggleSearch
-        }
-
-        function muteUnmute() {
-            // ... Остальная логика muteUnmute
         }
 
         var audioPlayers = document.querySelectorAll('.audio-player'); // должно быть объявлено в начале
@@ -749,38 +801,28 @@
         }
 
         function prevTrack() {
-            // Останавливаем текущий трек и сбрасываем время
             tracks[currentTrackIndex].pause();
             tracks[currentTrackIndex].currentTime = 0;
 
-            // Отнимаем 1 от индекса, чтобы вернуться к предыдущему треку
-            // Если мы на первом треке, переходим к последнему
             currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
 
-            // Воспроизводим предыдущий трек
             playTrack(currentTrackIndex);
         }
 
         function nextTrack() {
-            // Останавливаем текущий трек
             tracks[currentTrackIndex].pause();
             tracks[currentTrackIndex].currentTime = 0;
 
-            // Увеличиваем индекс на 1, чтобы перейти к следующему треку
-            // Используем модульное сложение, чтобы вернуться к первому треку после последнего
             currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
 
-            // Воспроизводим следующий трек
             playTrack(currentTrackIndex);
         }
 
-        // Функция, которая меняет трек 
         function changeTrack(trackPath) {
             audioPlayer.src = trackPath;
             togglePlay(); // Начинаем воспроизведение
         }
 
-        // Обновите функцию обработчика событий progress bar для настройки времени воспроизведения
         document.querySelector('.progress-bar').addEventListener('input', function (e) {
             var duration = audioPlayer.duration;
             if (duration > 0) {
@@ -800,37 +842,29 @@
         var totalTracks = 9; // Укажите общее количество треков
 
         function playTrack(index) {
-            // остановить все треки и сбросить текущее время
             tracks.forEach(function (track) {
                 track.pause();
                 track.currentTime = 0;
             });
 
-            // Обновляем текущий индекс трека
             currentTrackIndex = index;
 
-            // Воспроизводим выбранный трек
             tracks[currentTrackIndex].play();
 
-            // Обновляем информацию о треке и прогресс-бар
             updateTrackInfo(currentTrackIndex);
             updateProgressBar(currentTrackIndex);
 
             tracks[currentTrackIndex].onloadedmetadata = function () {
-                // Обновите отображение продолжительности трека при загрузке метаданных
                 updateTimeDisplay();
             };
 
         }
 
-        // Обновляем информацию о текущем треке
         function updateTrackInfo(index) {
             var trackInfoTitle = document.querySelector('.track-current-title');
             var trackInfoArtist = document.querySelector('.track-current-artist');
             var trackInfoImage = document.querySelector('.track-current-img');
 
-            // Пример получения информации о треке по его индексу
-            // Эти данные могут быть загружены из файла плейлиста или настроены вручную
             var title = 'Трек ' + (index + 1); // Получаем название трека
             var artist = 'Исполнитель ' + (index + 1); // Получаем исполнителя
 
@@ -878,14 +912,14 @@
             tracks[currentTrackIndex].muted = !isMuted;
             // Обновите иконку звука в зависимости от состояния mute
             var muteButton = document.querySelector('.center button');
-            muteButton.textContent = isMuted ? '🔊' : '🔇';
+
         }
 
         // Объявление setVolumeToHalf
         function setVolumeToHalf() {
             var audioPlayers = document.querySelectorAll('.audio-player');
             audioPlayers.forEach(function (audio) {
-                audio.volume = 0.5; // 50% от максимального уровня
+                audio.volume = 0.1; // 50% от максимального уровня
             });
         }
 
