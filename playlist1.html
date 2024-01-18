@@ -422,11 +422,12 @@
             justify-content: center;
             position: fixed;
             /* Используйте fixed, чтобы разместить по центру окна браузера */
-            top: 50%;
+            top: 70%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-align: center;
+            position: absolute;
             /* z-index: 1000; */
-            /* Повысьте, чтобы ничто не перекрывало список */
         }
 
         #track-list li {
@@ -623,8 +624,7 @@
     <!-- --------------------+
     |        Плейлист        |
     +--------------------- -->
-    <div id="track-list-container"
-        style="text-align: center; position: absolute; top: 85%; left: 50%; transform: translate(-50%, -50%);">
+    <div id="track-list-container">
         <h2>Плейлист 1</h2>
         <h4>The Prodigy</h4>
         <ul id="track-list" style="list-style: none; padding: 0;">
