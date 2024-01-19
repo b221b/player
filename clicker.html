@@ -602,11 +602,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
+
+            /* background-image: url(shit/logo/mangawallpaper.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat; */
         }
 
         .container {
-            width: 80%;
-            height: 60%;
+            width: 50%;
+            height: 50%;
             display: flex;
         }
 
@@ -620,10 +625,20 @@
         }
 
         .left {
+            /* background-image: url(shit/logo/satoru2\ \(3\).jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat; */
+
             background-color: purple;
         }
 
         .right {
+            /* background-image: url(shit/logo/suguru.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat; */
+
             background-color: #808000;
         }
 
@@ -631,18 +646,153 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        @media (max-width: 1800px) {
+
+            .container {
+                width: 60%;
+                height: 50%;
+                display: flex;
+            }
+        }
+
+        @media(max-width: 1200px) {
+
+            .container {
+                width: 70%;
+                height: 50%;
+                display: flex;
+            }
+        }
+
+        @media(max-width: 768px) {
+
+            .container {
+                width: 100%;
+                height: 50%;
+                display: flex;
+            }
+        }
+
+        .change-names-button {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) translateY(-350%);
+            background-color: #1db954;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 500px;
+            font-weight: 500;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            z-index: 101;
+            top: 30%;
+            height: 50px;
+            width: 200px;
+            font-size: 18px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Add these styles for the dropdown menu */
+        .names-dropdown {
+            width: 30%;
+            position: absolute;
+            top: 38%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #181818;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgb(0 0 0 / 50%);
+            z-index: 102;
+            display: none;
+        }
+
+        .names-dropdown input[type="text"] {
+            width: 80%;
+            padding: 12px 24px;
+            border: 1px solid #535353;
+            background-color: #121212;
+            color: white;
+            border-radius: 500px;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+            margin-bottom: 10px;
+        }
+
+        .names-dropdown .submit-names-button {
+            background-color: #1db954;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 500px;
+            font-weight: 500;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 10px;
+        }
     </style>
 
     <div class="container">
+
         <div class="clicker left" onclick="updateScore('left')">
-            <div class="score">Мирослав: <span id="leftScore">0</span></div>
+            <div class="score">
+                <div class="track-current-info">
+                    <div class="track-current-title">
+                        <span class="track-current-name-1">Имя1</span>
+                    </div>
+                </div>:
+                <span id="leftScore">0</span>
+            </div>
         </div>
+
         <div class="clicker right" onclick="updateScore('right')">
-            <div class="score">Влад: <span id="rightScore">0</span></div>
+            <div class="score">
+                <div class="track-current-info">
+                    <div class="track-current-title">
+                        <span class="track-current-name-2">Имя2</span>
+                    </div>
+                </div>:
+                <span id="rightScore">0</span>
+            </div>
+        </div>
+
+        <!-- Add this button inside .controls .center div -->
+        <button class="change-names-button">Ввести имена</button>
+
+        <!-- Add this dropdown menu right before the closing body tag -->
+        <div id="names-dropdown" class="names-dropdown">
+            <input type="text" id="name-input-1" placeholder="Введите имя 1">
+            <input type="text" id="name-input-2" placeholder="Введите имя 2">
+            <button class="submit-names-button">Подтвердить</button>
         </div>
     </div>
 
-    <script>
+    <script замена имен>
+        // Add this code before the closing body tag
+        document.querySelector('.change-names-button').addEventListener('click', function () {
+            var namesDropdown = document.querySelector('.names-dropdown');
+            namesDropdown.style.display = (namesDropdown.style.display === 'block' ? 'none' : 'block');
+        });
+
+        document.querySelector('.submit-names-button').addEventListener('click', function () {
+            var nameInput1 = document.getElementById('name-input-1');
+            var nameInput2 = document.getElementById('name-input-2');
+            var name1Element = document.querySelector('.track-current-info .track-current-name-1');
+            var name2Element = document.querySelector('.track-current-info .track-current-name-2');
+
+            if (nameInput1.value && nameInput2.value) {
+                name1Element.textContent = nameInput1.value;
+                name2Element.textContent = nameInput2.value;
+                var namesDropdown = document.getElementById('names-dropdown');
+                namesDropdown.style.display = 'none';
+            } else {
+                alert('Please enter both names.');
+            }
+        });
+    </script>
+
+    <script работа кнопок>
         let leftScore = 0;
         let rightScore = 0;
 
@@ -656,10 +806,11 @@
             }
         }
     </script>
-    
+
     <!-- --------------------+
     |         Кликер         |
     +--------------------- -->
+
     <script>
         // Обработчик клика для бургерного меню
         document.querySelector('.burger-menu-button').addEventListener('click', toggleSidebar);
