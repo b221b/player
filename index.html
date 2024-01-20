@@ -756,6 +756,7 @@
             });
         });
 
+        let currentAudioTime = 0;
 
         function toggleSidebar() {
             var sidebar = document.querySelector('.sidebar');
@@ -813,10 +814,62 @@
 
         var progressBar = document.querySelector('.progress-bar');
 
+        progressBar.addEventListener('input', (e) => {
+            const audioPlayer = document.querySelector('.audio-player');
+            const duration = audioPlayer.duration;
+            if (duration > 0) {
+                const value = e.target.value;
+                const currentTime = (duration * value) / 100;
+                audioPlayer.currentTime = currentTime;
+            }
+        });
+
+        // Add event listener for audio player timeupdate event
+        const audioPlayer = document.querySelector('.audio-player');
+        audioPlayer.addEventListener('timeupdate', () => {
+            const progressBar = document.querySelector('.progress-bar');
+            const duration = audioPlayer.duration;
+            const currentTime = audioPlayer.currentTime;
+            if (duration > 0) {
+                const value = (100 / duration) * currentTime;
+                progressBar.value = value;
+            }
+        });
+
+        function playTrack(index) {
+            tracks.forEach(function (track) {
+                track.pause();
+                track.currentTime = 0;
+
+                updateTimeDisplay(); // Обновление времени отображения
+
+                tracks[currentTrackIndex].onloadedmetadata = function () {
+                    updateTimeDisplay(); // Обновление времени отображения
+                };
+
+            });
+
+            currentTrackIndex = index;
+
+            tracks[currentTrackIndex].play();
+
+            updateTrackInfo(currentTrackIndex);
+            updateProgressBar(currentTrackIndex);
+            updateTimeDisplay(); // Add this line
+
+            tracks[currentTrackIndex].onloadedmetadata = function () {
+                updateTimeDisplay(); // Add this line
+            };
+        }
+
         function togglePlay() {
             if (tracks[currentTrackIndex].paused) {
-                playTrack(currentTrackIndex);
+                // If the track is paused, set the current time and play
+                tracks[currentTrackIndex].currentTime = currentAudioTime;
+                tracks[currentTrackIndex].play();
             } else {
+                // If the track is playing, pause and save the current time
+                currentAudioTime = tracks[currentTrackIndex].currentTime;
                 tracks[currentTrackIndex].pause();
             }
             // Также переключим иконку воспроизведения/паузы
@@ -864,24 +917,7 @@
         var currentTrackNumber = 1;
         var totalTracks = 9; // Укажите общее количество треков
 
-        function playTrack(index) {
-            tracks.forEach(function (track) {
-                track.pause();
-                track.currentTime = 0;
-            });
 
-            currentTrackIndex = index;
-
-            tracks[currentTrackIndex].play();
-
-            updateTrackInfo(currentTrackIndex);
-            updateProgressBar(currentTrackIndex);
-
-            tracks[currentTrackIndex].onloadedmetadata = function () {
-                updateTimeDisplay();
-            };
-
-        }
 
         function updateTrackInfo(index) {
             var trackInfoTitle = document.querySelector('.track-current-title');
@@ -894,6 +930,7 @@
             trackInfoTitle.textContent = title;
             trackInfoArtist.textContent = artist;
             trackInfoImage.src = "path-to-image-for-track.jpg"; // Установить путь к изображению трека
+            updateTimeDisplay();
         }
 
         // Обновляем прогресс-бар при воспроизведении трека
