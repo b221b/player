@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Музыкальный плеер</title>
 
-    <link rel="icon" href="shit/icon2.png" sizes="190x190" >
+    <link rel="icon" href="shit/icon2.png" sizes="190x190">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -998,8 +998,7 @@
     |         музыка         |
     +--------------------- -->
 
-    <audio class="audio-player"
-        src="tracks/2.Prodigy/muzlome_The_Prodigy_-_Breathe_47896844.mp3" hidden
+    <audio class="audio-player" src="tracks/2.Prodigy/muzlome_The_Prodigy_-_Breathe_47896844.mp3" hidden
         autoplay="false"></audio>
     <audio class="audio-player"
         src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Blow (Official Audio) (128 kbps).mp3" hidden
@@ -1048,7 +1047,7 @@
         </div>
 
         <script кнопка плей-пауза>
-            
+
         </script>
 
         <div class="progress-container">
@@ -1265,7 +1264,7 @@
             currentAudioTime = 0; // Reset currentAudioTime when the track ends
             nextTrack();
         });
-        
+
         tracks.forEach(function (track) {
             track.addEventListener('timeupdate', function () {
                 var value = (100 / track.duration) * track.currentTime;
@@ -1274,17 +1273,17 @@
         });
 
         function updatePlayPauseButton() {
-                var playButton = document.getElementById("togglePlayButton");
-                if (tracks[currentTrackIndex].paused) {
-                    playButton.innerHTML = '<i class="fas fa-play"></i>';
-                } else {
-                    playButton.innerHTML = '<i class="fas fa-pause"></i>';
-                }
+            var playButton = document.getElementById("togglePlayButton");
+            if (tracks[currentTrackIndex].paused) {
+                playButton.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                playButton.innerHTML = '<i class="fas fa-pause"></i>';
             }
+        }
 
-            // Call the function initially to set the correct icon
-            updatePlayPauseButton();
-            
+        // Call the function initially to set the correct icon
+        updatePlayPauseButton();
+
         function togglePlay() {
             if (tracks[currentTrackIndex].paused) {
                 tracks[currentTrackIndex].currentTime = currentAudioTime;
@@ -1359,13 +1358,11 @@
             var track = tracks[currentTrackIndex];
 
             track.addEventListener('timeupdate', function () {
-    if (!track.paused) {
-        var value = (100 / track.duration) * track.currentTime;
-        progressBar.value = value;
+                var value = (100 / track.duration) * track.currentTime;
+                progressBar.value = value;
 
-        // Обновляем отображаемое время
-        updateTimeDisplay();
-    }
+                // Обновляем отображаемое время
+                updateTimeDisplay();
             });
         }
 
