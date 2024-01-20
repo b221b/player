@@ -737,6 +737,7 @@
                 justify-content: center;
                 gap: 15px;
                 /* Добавим пространство между блоками */
+                width: 100%;
                 margin-top: 56px;
             }
 

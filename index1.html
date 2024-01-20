@@ -23,6 +23,23 @@
             color: #fff;
         }
 
+        /* Стили для скроллбара */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Стили для колесика скроллбара */
+        ::-webkit-scrollbar-thumb {
+            background-color: #cecece;
+            border-radius: 10px;
+        }
+
+        /* Стили для трека скроллбара */
+        ::-webkit-scrollbar-track {
+            background-color: #494949;
+            border-radius: 10px;
+        }
+
         .top-panel {
             display: flex;
             align-items: center;
@@ -147,8 +164,8 @@
         }
 
         .player .cover-art {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             background-color: #282828;
             border-radius: 50%;
             position: relative;
@@ -195,11 +212,6 @@
             box-shadow: 0 -2px 4px rgb(0 0 0 / 50%);
             z-index: 101;
 
-        }
-
-        .controls .current-time,
-        .controls.duration-time {
-            margin-left: 40px;
         }
 
         .controls .left,
@@ -427,9 +439,28 @@
         }
 
         #togglePlayButton {
-            width: 18px;
-            margin-left: 10px;
+            width: 40px;
         }
+
+        #toggleBackFrontButton {
+            width: 40px;
+        }
+
+        .image-button {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            background-position: center;
+
+        }
+
+        .image-button:focus,
+        .image-button:hover {
+            outline: none;
+        }
+
+
 
         /* --------------------------------------------- */
         /* --------------------------------------------- */
@@ -480,11 +511,6 @@
                 z-index: 12;
             }
 
-            .controls {
-                padding: 0 0px;
-
-            }
-
             .controls .center {
                 gap: 10px;
                 justify-content: space-around;
@@ -517,11 +543,8 @@
 
             .controls button {
                 font-size: 22px;
-                /* Увеличиваем размер иконок */
                 padding: 5px 12px;
-                /* Увеличиваем область вокруг иконки */
             }
-
 
             .progress-bar {
                 width: 100%;
@@ -534,16 +557,60 @@
             .burger-menu-button {
                 display: block;
                 z-index: 11;
-                /* Удостоверьтесь, что меню будет над остальными элементами */
                 display: block;
                 margin-right: 20px;
                 cursor: pointer;
                 font-size: 25px;
-                /* Увеличение размера для большей видимости */
                 z-index: 100;
-                /* Поднятие выше других элементов */
                 color: #fff;
 
+            }
+
+            .player .cover-art {
+                width: 300px;
+                height: 300px;
+                background-color: #282828;
+                border-radius: 50%;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 20px 60px rgb(0 0 0 / 50%);
+            }
+
+            .player .cover-art img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                border-radius: 50%;
+            }
+
+            .controls .left,
+            .controls .center,
+            .controls .right {
+                align-items: center;
+                justify-content: center;
+            }
+
+            .controls .left,
+            .controls .right {
+                flex: 1;
+            }
+
+            .controls .center {
+                flex: 3;
+            }
+
+            .controls button {
+                margin: 0 5px;
+            }
+
+            .progress-bar {
+                width: 80%;
+            }
+
+            .current-time,
+            .duration-time {
+                margin: 0 10px;
             }
         }
     </style>
@@ -615,45 +682,322 @@
     +--------------------- -->
 
     <div class="player">
-        <div class="cover-art">
-            <img src="shit/logo/satoru2 (1).jpg" alt="Обложка альбома" />
-        </div>
-        <div class="track-info">
+        <button class="image-button" onclick="togglePlay()">
+            <div class="cover-art">
+                <img src="shit/эквалайзеры/top4.gif" alt="Обложка альбома" />
+            </div>
+        </button>
+
+        <!-- <div class="track-info">
             <div class="title">Название трека</div>
             <div class="artist">Исполнитель</div>
-        </div>
+        </div> -->
+
     </div>
 
     <!-- --------------------+
     |     Плеер по центру    |
     +--------------------- -->
 
+    <!-- ----------------------+
+    |         альбомы          |
+    +----------------------- -->
+
+    <div альбомы>
+
+        <style>
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                width: 100%;
+                /* <= Новое свойство для ширины */
+                /* Остальные свойства... */
+            }
+
+            .section {
+                margin-bottom: 40px;
+            }
+
+            .section-title {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .section-content {
+                font-size: 16px;
+                line-height: 1.5;
+            }
+
+            .center {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 15px;
+                /* Добавим пространство между блоками */
+                width: 100%;
+                margin-top: 56px;
+            }
+
+            .author-box {
+                background: #fff;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                text-align: center;
+                max-width: 350px;
+                flex-grow: 1;
+                flex-shrink: 0;
+                flex-basis: calc(50% - 30px);
+            }
+
+            .author-info {
+                color: #000;
+            }
+
+            .author-name {
+                color: #512da8;
+                margin: 5px 0;
+            }
+
+            .author-desc {
+                font-size: 16px;
+                line-height: 1.5;
+            }
+
+            .author-gif {
+                border-radius: 15px;
+                width: 100%;
+                max-width: 200px;
+                margin-bottom: 20px;
+            }
+
+            @media (max-width: 768px) {
+
+                .container {
+                    max-width: 400px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    width: 100%;
+                }
+
+                .section {
+                    margin-bottom: 40px;
+                }
+
+                .section-title {
+                    font-size: 24px;
+                    margin-bottom: 10px;
+                }
+
+                .section-content {
+                    font-size: 16px;
+                    line-height: 1.5;
+                }
+
+                .center {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-items: flex-start;
+                    justify-content: center;
+                    gap: 15px;
+                    width: 100%;
+                    margin-top: 56px;
+                }
+
+                .author-box {
+                    background: #fff;
+                    border-radius: 15px;
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 20px;
+                    text-align: center;
+                    max-width: 340px;
+                    flex-grow: 1;
+                    flex-shrink: 0;
+                    flex-basis: calc(100% - 30px);
+                }
+
+                .author-info {
+                    color: #000;
+                }
+
+                .author-name {
+                    color: #512da8;
+                    margin: 5px 0;
+                }
+
+                .author-desc {
+                    font-size: 16px;
+                    line-height: 1.5;
+                }
+
+                .author-gif {
+                    border-radius: 15px;
+                    width: 100%;
+                    max-width: 200px;
+                    margin-bottom: 20px;
+                }
+            }
+        </style>
+
+        <div class="container">
+            <h1 style="display: flex; justify-content: center;">Альбомы</h1>
+
+            <!-- ----------------------+
+            |       Новые релизы       |
+            +----------------------- -->
+
+            <div style="padding-top: 56px;">
+                <main class="section">
+                    <h2 class="section-title">Новые релизы
+                    </h2>
+                </main>
+            </div>
+
+            <div class="center">
+                <div class="author-box">
+                    <img src="shit/logo/BERSERK.jpg" alt="Developer Avatar" class="author-gif">
+                    <div class="author-info">
+
+                        <a href="https://music.yandex.ru/album/28933418" class="author-name-button">
+                            <h3 class="author-name">BERSERK</h3>
+                        </a>
+
+                        <p class="author-desc">Makishima, MEELBRN <br> 2024 фонк</p>
+                    </div>
+                </div>
+
+                <div class="author-box">
+                    <img src="shit/logo/PIMP PARTY.jpg" alt="Developer Avatar" class="author-gif">
+                    <div class="author-info">
+
+                        <a href="https://music.yandex.ru/album/29071636" class="author-name-button">
+                            <h3 class="author-name">PIMP PARTY</h3>
+                        </a>
+
+                        <p class="author-desc">MISTA PLAYA <br> 2024 фонк</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ----------------------+
+            |       Новые релизы       |
+            +----------------------- -->
+
+            <!-- ----------------------+
+            |     Подкасты и книги     |
+            +----------------------- -->
+
+            <div style="padding-top: 56px;">
+                <main class="section">
+                    <h2 class="section-title">Подкасты и книги
+                    </h2>
+                </main>
+            </div>
+
+            <div class="center">
+                <div class="author-box">
+                    <img src="shit/logo/дело.png" alt="Developer Avatar" class="author-gif">
+                    <div class="author-info">
+
+                        <a href="https://music.yandex.ru/users/yamusic-podcast/playlists/1088"
+                            class="author-name-button">
+                            <h3 class="author-name">Заняться делом</h3>
+                        </a>
+
+                        <p class="author-desc">Пока руки заняты созданием прекрасного, погрузитесь в захватывающие
+                            истории или послушайте вдохновляющие беседы о ремёслах и мастерах своего дела.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="author-box">
+                    <img src="shit/logo/аппетит.png" alt="Developer Avatar" class="author-gif">
+                    <div class="author-info">
+
+                        <a href="https://music.yandex.ru/users/yamusic-podcast/playlists/1017"
+                            class="author-name-button">
+                            <h3 class="author-name">Звучит аппетитно</h3>
+                        </a>
+
+                        <p class="author-desc">Подкасты, от которых текут слюнки: о еде, напитках и местах, где всё это
+                            можно попробовать
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ----------------------+
+            |     Подкасты и книги     |
+            +----------------------- -->
+
+            <!-- ----------------------+
+            |   Популярные плейлисты   |
+            +----------------------- -->
+            <div style="padding-top: 56px;">
+                <main class="section">
+                    <h2 class="section-title">Популярные плейлисты
+                    </h2>
+                </main>
+            </div>
+
+            <div class="center">
+                <div class="author-box">
+                    <img src="shit/logo/бр.png" alt="Developer Avatar" class="author-gif">
+                    <div class="author-info">
+
+                        <a href="https://music.yandex.ru/users/yandexmusic/playlists/1213" class="author-name-button">
+                            <h3 class="author-name">Бразильский фонк</h3>
+                        </a>
+
+                        <p class="author-desc">Музыка жанров Brazilian phonk/Baile funk/Brazilian funk, пропитанная
+                            духом латиноамериканских джунглей.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="author-box">
+                    <img src="shit/logo/фонк.png" alt="Developer Avatar" class="author-gif">
+                    <div class="author-info">
+
+                        <a href="https://music.yandex.ru/users/music-blog/playlists/2710" class="author-name-button">
+                            <h3 class="author-name">Фонк</h3>
+                        </a>
+                        <p class="author-desc">Поджанр хип-хопа, вдохновлённый Мемфис-рэпом 1990-х годов. Оккультная
+                            тематика в текстах, старые фанковые сэмплы в музыке — вот несколько отличительных черт
+                            стиля, который снова вовсю набирает популярность.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ----------------------+
+            |   Популярные плейлисты   |
+            +----------------------- -->
+
+            <br><br><br><br><br><br><br><br>
+
+        </div>
+
+    </div>
+
+    <!-- ----------------------+
+    |         альбомы          |
+    +----------------------- -->
+
     <!-- --------------------+
     |         музыка         |
     +--------------------- -->
-    <audio class="audio-player"
-        src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Blow (Official Audio) (128 kbps).mp3" hidden
-        autoplay="false"></audio>
-    <audio class="audio-player"
-        src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Delete (Official Audio) (128 kbps).mp3" hidden
-        autoplay="false"></audio>
-    <audio class="audio-player"
-        src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - GTG (Official Music Video) (128 kbps).mp3" hidden
-        autoplay="false"></audio>
-    <audio class="audio-player"
-        src="tracks/2.freddie_dredd/Y2mate.mx - FREDDIE DREDD - KILLIN' ON DEMAND (PROD. RYAN C) (128 kbps).mp3" hidden
-        autoplay="false"></audio>
-    <audio class="audio-player" src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Limbo (Lyrics) (128 kbps).mp3"
-        hidden autoplay="false"></audio>
-    <audio class="audio-player"
-        src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Stunna (Official Audio) (128 kbps).mp3" hidden
-        autoplay="false"></audio>
-    <audio class="audio-player"
-        src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - WTH (Official Audio) (128 kbps).mp3" hidden
-        autoplay="false"></audio>
-    <audio class="audio-player" src="tracks/2.freddie_dredd/Y2mate.mx - Opaul (128 kbps).mp3" hidden
-        autoplay="false"></audio>
 
+    
 
     <!-- --------------------+
     |         музыка         |
@@ -669,10 +1013,10 @@
             <button onclick="togglePlay()">▶️</button>
             <button onclick="nextTrack()">⏭</button> -->
 
-            <button onclick="prevTrack()" id="togglePlayButton"><img src="shit/previous.png" width="18px"></button>
+            <button onclick="prevTrack()" id="toggleBackFrontButton"><img src="shit/previous.png" width="18px"></button>
             <!-- <button onclick="togglePlay()"><img src="shit/play.png" width="22px"></button> -->
             <button onclick="togglePlay()" id="togglePlayButton"><i class="fas fa-play"></i></button>
-            <button onclick="nextTrack()" id="togglePlayButton"><img src="shit/next.png" width="18px"></button>
+            <button onclick="nextTrack()" id="toggleBackFrontButton"><img src="shit/next.png" width="18px"></button>
 
             <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
         </div>
@@ -770,7 +1114,7 @@
     |     Нижняя панель      |
     +--------------------- -->
 
-    <script>
+    <script скрипты>
         // Обработчик клика для бургерного меню
         document.querySelector('.burger-menu-button').addEventListener('click', toggleSidebar);
 
