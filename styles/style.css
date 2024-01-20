@@ -516,4 +516,522 @@ html {
         transform: translateX(110px) translateY(30px);
     }
 
+}body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #121212;
+    color: #fff;
+}
+
+.top-panel {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px;
+    background-color: #181818;
+    padding-right: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 98%;
+    z-index: 10;
+}
+
+.search-container {
+    position: relative;
+    margin-right: 24px;
+}
+
+.search-container input[type="text"] {
+    width: 300px;
+    padding: 12px 24px 12px 48px;
+    border: 1px solid #535353;
+    background-color: #121212;
+    color: white;
+    border-radius: 500px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.search-container input[type="text"]::placeholder {
+    color: #ccc;
+}
+
+.search-container button {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.top-panel .login-button {
+    background-color: #1db954;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 500px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.top-panel .login-button:hover {
+    background-color: #1ed760;
+}
+
+.sidebar {
+    position: fixed;
+    top: 60px;
+    /* Высота top-panel */
+    left: 0;
+    width: 230px;
+    /* Более широкая панель для большего количества контента */
+    height: 100vh;
+    background-color: #181818;
+    color: #b3b3b3;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar img {
+    height: 40px;
+}
+
+.sidebar button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.sidebar button:hover {
+    color: #fff;
+}
+
+.sidebar button img {
+    margin-right: 20px;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 60px);
+    margin-left: 230px;
+    padding: 20px;
+    position: relative;
+}
+
+.player .cover-art {
+    width: 300px;
+    height: 300px;
+    background-color: #282828;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgb(0 0 0 / 50%);
+}
+
+.player .cover-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+}
+
+.player .track-info {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.player .track-info .title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.player .track-info .artist {
+    font-size: 16px;
+    color: #b3b3b3;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    /* Отступа слева теперь нет, теперь панель будет начинаться с левого края экрана */
+    bottom: 0;
+    width: 100%;
+    /* Панель займёт всю ширину экрана */
+    height: 90px;
+    background-color: #181818;
+    padding: 0 30px;
+    /* Устанавливаем отступ справа и слева */
+    box-shadow: 0 -2px 4px rgb(0 0 0 / 50%);
+}
+
+.controls .left,
+.controls .center,
+.controls .right {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 30px;
+}
+
+.controls .left {
+    left: 30px;
+}
+
+.controls .right {
+    right: 30px;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.controls button:hover {
+    color: #1db954;
+}
+
+.controls .progress-bar {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100vw;
+    height: 4px;
+    background: #535353;
+    border-radius: 2px;
+    outline: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+.controls .progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    /* Width of the slider handle */
+    height: 12px;
+    /* Height of the slider handle */
+    background: #1db954;
+    cursor: pointer;
+    /* Cursor on hover */
+    border-radius: 50%;
+}
+
+/* Контейнер громкости */
+.controls .volume-container {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    /* Это выравнивает содержимое по правому краю */
+    padding-right: 30px;
+    position: relative;
+    /* Это нам нужно, чтобы корректно позиционировать ползунок */
+}
+
+.controls .progress-container {
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    padding: 0;
+}
+
+/* Базовые стили заголовков и списков в sidebar */
+.sidebar h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    /* Чтобы выровнять текст с кнопками */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+}
+
+.sidebar ul li:hover {
+    background-color: #282828;
+}
+
+.top-panel .logo {
+    flex-grow: 1;
+    /* Дает логотипу возможность занимать доступное пространство */
+    font-size: 24px;
+    /* Вы можете настроить размер шрифта по вашему усмотрению */
+    font-weight: 700;
+    /* Более жирный шрифт для имитации логотипа Spotify */
+    color: #1db954;
+    /* Зеленый цвет логотипа Spotify */
+    padding-left: 50px;
+    /* Отступ слева */
+}
+
+.controls .center {
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Расстояние между элементами */
+}
+
+.track-current {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Расстояние между иконкой и текстом трека */
+}
+
+.track-current-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.track-current-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.track-current-title,
+.track-current-artist {
+    line-height: 1;
+}
+
+.track-action-like,
+.track-action-add,
+.track-action-share {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.track-action-like:hover,
+.track-action-add:hover,
+.track-action-share:hover {
+    color: #fff;
+    /* Белый цвет при наведении */
+}
+
+.volume-slider {
+    width: 100px;
+    /* Можно настроить */
+    margin-left: 12px;
+    /* Отступ слева от иконки */
+}
+
+/* Стиль для ползунка громкости */
+.controls .volume-slider {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 4px;
+    border-radius: 2px;
+    background: #535353;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.controls .volume-slider:hover {
+    opacity: 1;
+}
+
+.controls .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #1db954;
+    cursor: pointer;
+}
+
+.controls .volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background: #1db954;
+    cursor: pointer;
+}
+
+/* Бургерное меню стили */
+.burger-menu-button {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Стиль для активного меню */
+.active-menu {
+    transform: translateX(0);
+}
+
+
+
+/* --------------------------------------------- */
+/* --------------------------------------------- */
+/* --------------------------------------------- */
+
+
+
+@media (max-width: 768px) {
+    .top-panel {
+        justify-content: flex-start;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .top-panel .search-container,
+    .sidebar {
+        display: none;
+    }
+
+    .top-panel .logo {
+        z-index: 9;
+        margin: 0 15px;
+    }
+
+    .burger-menu-button {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        z-index: 11;
+    }
+
+    .search-container input[type="text"] {
+        width: 150px;
+    }
+
+    .top-panel .login-button {
+        position: absolute;
+        right: 50px;
+        z-index: 10;
+    }
+
+    .search-container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-right: 0;
+    }
+
+    .search-container button {
+        z-index: 12;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 10;
+        width: 80%;
+        padding-top: 60px;
+    }
+
+    .sidebar.active-menu {
+        transform: translateX(0);
+    }
+
+    .player {
+        margin-left: 0;
+    }
+
+    .controls {
+        padding: 0 20px;
+    }
+
+    .controls .center {
+        gap: 10px;
+        justify-content: space-around;
+        padding: 0;
+        width: 100%;
+        position: relative;
+        left: unset;
+        transform: unset;
+    }
+
+    .controls .playback-controls {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .controls .volume-slider,
+    .controls .volume-container,
+    .controls .track-action-like,
+    .controls .track-action-add,
+    .controls .track-action-share,
+    .controls button[onclick="toggleMute()"] {
+        display: none;
+    }
+
+    .controls .playback-status {
+        position: static;
+        flex-grow: 1;
+    }
+
+    .controls button {
+        font-size: 22px;
+        /* Увеличиваем размер иконок */
+        padding: 5px 12px;
+        /* Увеличиваем область вокруг иконки */
+    }
+
+
+    .progress-bar {
+        width: 100%;
+    }
+
+    .track-current {
+        transform: translateX(110px) translateY(30px);
+    }
+
 }
