@@ -1132,6 +1132,11 @@
         // Обработчик клика для бургерного меню
         document.querySelector('.burger-menu-button').addEventListener('click', toggleSidebar);
 
+        // Add event listener for audio player timeupdate event
+        const audioPlayer = document.querySelector('.audio-player');
+        const currentTimeDisplay = document.querySelector('.current-time');
+        const durationDisplay = document.querySelector('.duration-time');
+        
         document.addEventListener('DOMContentLoaded', function () {
             var burgerButton = document.querySelector('.burger-menu-button');
             var sidebar = document.querySelector('.sidebar');
@@ -1217,10 +1222,7 @@
             }
         });
 
-        // Add event listener for audio player timeupdate event
-        const audioPlayer = document.querySelector('.audio-player');
-        const currentTimeDisplay = document.querySelector('.current-time');
-        const durationDisplay = document.querySelector('.duration-time');
+        
 
         audioPlayer.addEventListener('timeupdate', () => {
             const progressBar = document.querySelector('.progress-bar');
@@ -1230,10 +1232,8 @@
                 const value = (100 / duration) * currentTime;
                 progressBar.value = value;
             }
-            durationDisplay.textContent = formatTime(audioPlayer.duration);
-            currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
-
-
+            currentAudioTime = currentTime; // Update currentAudioTime here
+            updateTimeDisplay();
         });
 
         function playTrack(index) {
@@ -1357,12 +1357,13 @@
         function updateProgressBar(index) {
             var track = tracks[currentTrackIndex];
 
+            track.addEventListener('loadedmetadata', function () {
+                progressBar.max = track.duration;
+            });
+
             track.addEventListener('timeupdate', function () {
                 var value = (100 / track.duration) * track.currentTime;
                 progressBar.value = value;
-
-                // Обновляем отображаемое время
-                updateTimeDisplay();
             });
         }
 
