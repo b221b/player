@@ -197,6 +197,11 @@
 
         }
 
+        .controls .current-time,
+        .controls.duration-time {
+            margin-left: 40px;
+        }
+
         .controls .left,
         .controls .center,
         .controls .right {
@@ -422,11 +427,8 @@
         }
 
         #togglePlayButton {
-            width: 40px;
-        }
-
-        #toggleBackFrontButton {
-            width: 40px;
+            width: 18px;
+            margin-left: 10px;
         }
 
         /* --------------------------------------------- */
@@ -667,10 +669,10 @@
             <button onclick="togglePlay()">▶️</button>
             <button onclick="nextTrack()">⏭</button> -->
 
-            <button onclick="prevTrack()" id="toggleBackFrontButton"><img src="shit/previous.png" width="18px"></button>
+            <button onclick="prevTrack()" id="togglePlayButton"><img src="shit/previous.png" width="18px"></button>
             <!-- <button onclick="togglePlay()"><img src="shit/play.png" width="22px"></button> -->
             <button onclick="togglePlay()" id="togglePlayButton"><i class="fas fa-play"></i></button>
-            <button onclick="nextTrack()" id="toggleBackFrontButton"><img src="shit/next.png" width="18px"></button>
+            <button onclick="nextTrack()" id="togglePlayButton"><img src="shit/next.png" width="18px"></button>
 
             <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
         </div>
