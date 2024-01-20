@@ -147,8 +147,8 @@
         }
 
         .player .cover-art {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             background-color: #282828;
             border-radius: 50%;
             position: relative;
@@ -429,6 +429,20 @@
             width: 40px;
         }
 
+        .image-button {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            background-position: center;
+
+        }
+
+        .image-button:focus,
+        .image-button:hover {
+            outline: none;
+        }
+
         /* --------------------------------------------- */
         /* --------------------------------------------- */
         /* --------------------------------------------- */
@@ -613,13 +627,17 @@
     +--------------------- -->
 
     <div class="player">
-        <div class="cover-art">
-            <img src="shit/logo/satoru2 (1).jpg" alt="Обложка альбома" />
-        </div>
-        <div class="track-info">
+        <button class="image-button" onclick="togglePlay()">
+            <div class="cover-art">
+                <img src="shit/equaliser7.gif" alt="Обложка альбома" />
+            </div>
+        </button>
+
+        <!-- <div class="track-info">
             <div class="title">Название трека</div>
             <div class="artist">Исполнитель</div>
-        </div>
+        </div> -->
+
     </div>
 
     <!-- --------------------+
