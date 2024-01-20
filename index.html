@@ -492,11 +492,6 @@
                 z-index: 12;
             }
 
-            .controls {
-                padding: 0 0px;
-
-            }
-
             .controls .center {
                 gap: 10px;
                 justify-content: space-around;
@@ -529,11 +524,8 @@
 
             .controls button {
                 font-size: 22px;
-                /* Увеличиваем размер иконок */
                 padding: 5px 12px;
-                /* Увеличиваем область вокруг иконки */
             }
-
 
             .progress-bar {
                 width: 100%;
@@ -546,14 +538,11 @@
             .burger-menu-button {
                 display: block;
                 z-index: 11;
-                /* Удостоверьтесь, что меню будет над остальными элементами */
                 display: block;
                 margin-right: 20px;
                 cursor: pointer;
                 font-size: 25px;
-                /* Увеличение размера для большей видимости */
                 z-index: 100;
-                /* Поднятие выше других элементов */
                 color: #fff;
 
             }
@@ -574,6 +563,35 @@
                 object-fit: cover;
                 display: block;
                 border-radius: 50%;
+            }
+
+            .controls .left,
+            .controls .center,
+            .controls .right {
+                align-items: center;
+                justify-content: center;
+            }
+
+            .controls .left,
+            .controls .right {
+                flex: 1;
+            }
+
+            .controls .center {
+                flex: 3;
+            }
+
+            .controls button {
+                margin: 0 5px;
+            }
+
+            .progress-bar {
+                width: 80%;
+            }
+
+            .current-time,
+            .duration-time {
+                margin: 0 10px;
             }
         }
     </style>
