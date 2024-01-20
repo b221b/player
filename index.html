@@ -640,7 +640,7 @@
 
     <div class="top-panel">
         <div class="burger-menu-button" onclick="toggleSidebar()">☰</div>
-        <div class="logo">Sportify1</div>
+        <div class="logo">Sportify</div>
         <!-- <div class="search-container">
             <button onclick="toggleSearch()">🔍</button>
             <input id="search-input" type="text" placeholder="Поиск...">
@@ -1265,6 +1265,7 @@
             currentAudioTime = 0; // Reset currentAudioTime when the track ends
             nextTrack();
         });
+        
         tracks.forEach(function (track) {
             track.addEventListener('timeupdate', function () {
                 var value = (100 / track.duration) * track.currentTime;
@@ -1358,11 +1359,13 @@
             var track = tracks[currentTrackIndex];
 
             track.addEventListener('timeupdate', function () {
-                var value = (100 / track.duration) * track.currentTime;
-                progressBar.value = value;
+    if (!track.paused) {
+        var value = (100 / track.duration) * track.currentTime;
+        progressBar.value = value;
 
-                // Обновляем отображаемое время
-                updateTimeDisplay();
+        // Обновляем отображаемое время
+        updateTimeDisplay();
+    }
             });
         }
 
