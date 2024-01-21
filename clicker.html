@@ -704,6 +704,28 @@
             margin-top: 10px;
         }
 
+        .reset-score-button {
+            position: absolute;
+            background-color: #1db954;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 500px;
+            font-weight: 500;
+            text-transform: uppercase;
+            cursor: pointer;
+            top: 85%;
+            margin-left: 15px;
+            height: 50px;
+            width: 200px;
+            font-size: 18px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .reset-score-button:hover {
+            background-color: #1ed760;
+        }
+
         @media (max-width: 1800px) {
 
             .container {
@@ -862,6 +884,17 @@
                 document.getElementById('rightScore').innerText = rightScore;
             }
         }
+    </script>
+
+    <button class="reset-score-button">Сбросить счёт</button>
+
+    <script сброс счета>
+        document.querySelector('.reset-score-button').addEventListener('click', function () {
+            leftScore = 0;
+            rightScore = 0;
+            document.getElementById('leftScore').innerText = leftScore;
+            document.getElementById('rightScore').innerText = rightScore;
+        });
     </script>
 
     <!-- --------------------+
