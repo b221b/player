@@ -576,146 +576,149 @@
     <!-- --------------------+
     |      Видео плеер       |
     +--------------------- -->
-
-    <style>
-        video {
-            width: 20%;
-            /* display: block; */
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            /* top: 100px; */
-        }
-
-        .profile-header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 5%;
-        }
-
-        .h3 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        
-        @media (max-width: 768px) {
-            .profile-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100%;
-                margin-left: 0;
-                padding: 20px;
-                box-sizing: border-box;
-            }
-
+    <div видео плеер>
+        <style>
             video {
-                width: 60%;
-                display: block;
+                width: 20%;
+                /* display: block; */
                 margin: 0 auto;
                 padding: 20px;
                 position: relative;
                 /* top: 100px; */
             }
-        }
-    </style>
 
-    <div class="profile-header">
-        <h2>Мои Видео</h2>
+            .profile-header {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                margin-top: 5%;
+            }
+
+            .h3 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+
+            @media (max-width: 768px) {
+                .profile-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+                    margin-left: 0;
+                    padding: 20px;
+                    box-sizing: border-box;
+                }
+
+                video {
+                    width: 60%;
+                    display: block;
+                    margin: 0 auto;
+                    padding: 20px;
+                    position: relative;
+                    /* top: 100px; */
+                }
+            }
+        </style>
+
+        <div class="profile-header">
+            <h2>Мои Видео</h2>
+        </div>
+
+        <div видео>
+            <!-- <h3 class="h3">Властелин Колец</h3> -->
+
+            <video id="myVideo" controls>
+                <source src="shit/video/chainsaw.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/choso.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/toji.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/aizen.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/aizen2.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/anakin.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/byebye.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/ishigo.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/hahaha.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/sigma.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/sigma2.mp4" type="video/mp4">
+            </video>
+
+            <video id="myVideo" controls>
+                <source src="shit/video/bankai.mp4" type="video/mp4">
+            </video>
+            <!-- <h3 class="h3" style="margin-top: 500px;">Хоббит</h3> -->
+        </div>
+
+        <script>
+            var video = document.getElementById("myVideo");
+
+            function playPause() {
+                if (video.paused) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            }
+
+            function setVolume() {
+                video.volume = document.getElementById("volume").value;
+            }
+
+            function fastForward() {
+                video.currentTime += 5;
+            }
+
+            function rewind() {
+                video.currentTime -= 5;
+            }
+
+            function fullScreen() {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.mozRequestFullScreen) {
+                    video.mozRequestFullScreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen();
+                }
+            }
+        </script>
+
     </div>
-
-    <!-- <h3 class="h3">Властелин Колец</h3> -->
-
-    <video id="myVideo" controls>
-        <source src="shit/video/chainsaw.mp4" type="video/mp4">
-    </video>
-
-    <video id="myVideo" controls>
-        <source src="shit/video/choso.mp4" type="video/mp4">
-    </video>
-
-    <video id="myVideo" controls>
-        <source src="shit/video/toji.mp4" type="video/mp4">
-    </video>
-
-    <video id="myVideo" controls>
-        <source src="shit/video/aizen.mp4" type="video/mp4">
-    </video>
-
-    <video id="myVideo" controls>
-        <source src="shit/video/aizen2.mp4" type="video/mp4">
-    </video>
-
-    <video id="myVideo" controls>
-        <source src="shit/video/anakin.mp4" type="video/mp4">
-    </video>
-
-    <video id="myVideo" controls>
-        <source src="shit/video/byebye.mp4" type="video/mp4">
-    </video>
-
-    <video id="myVideo" controls>
-        <source src="shit/video/ishigo.mp4" type="video/mp4">
-    </video>
-
-    <video id="myVideo" controls>
-        <source src="shit/video/hahaha.mp4" type="video/mp4">
-    </video>
-
-    <video id="myVideo" controls>
-        <source src="shit/video/sigma.mp4" type="video/mp4">
-    </video>
-
-    <video id="myVideo" controls>
-        <source src="shit/video/sigma2.mp4" type="video/mp4">
-    </video>
-    
-    <video id="myVideo" controls>
-        <source src="shit/video/bankai.mp4" type="video/mp4">
-    </video>
-    <!-- <h3 class="h3" style="margin-top: 500px;">Хоббит</h3> -->
-
-
-    <script>
-        var video = document.getElementById("myVideo");
-
-        function playPause() {
-            if (video.paused) {
-                video.play();
-            } else {
-                video.pause();
-            }
-        }
-
-        function setVolume() {
-            video.volume = document.getElementById("volume").value;
-        }
-
-        function fastForward() {
-            video.currentTime += 5;
-        }
-
-        function rewind() {
-            video.currentTime -= 5;
-        }
-
-        function fullScreen() {
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            } else if (video.mozRequestFullScreen) {
-                video.mozRequestFullScreen();
-            } else if (video.webkitRequestFullscreen) {
-                video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) {
-                video.msRequestFullscreen();
-            }
-        }
-    </script>
     <!-- --------------------+
     |      Видео плеер       |
     +--------------------- -->
