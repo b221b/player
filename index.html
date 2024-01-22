@@ -930,18 +930,23 @@
                 },
                 {
                     artist: "Freddie Dredd",
-                    title: "hz",
+                    title: "Delete",
                     src: "tracks/all/freddie_dredd (3).mp3"
                 },
                 {
                     artist: "Freddie Dredd",
-                    title: "hz",
+                    title: "GTG",
                     src: "tracks/all/freddie_dredd (4).mp3"
                 },
                 {
                     artist: "Freddie Dredd",
-                    title: "hz",
+                    title: "KILLIN' ON DEMAND",
                     src: "tracks/all/freddie_dredd (5).mp3"
+                },
+                {
+                    artist: "Freddie Dredd",
+                    title: "LIMBO",
+                    src: "tracks/all/freddie_dredd (6).mp3"
                 },
             ];
 
@@ -949,6 +954,7 @@
                 const audio = document.createElement('audio');
                 audio.src = track.src;
                 audio.controls = true;
+                audio.volume = 0.1;
 
                 const title = document.createElement('p');
                 title.textContent = `${track.artist} - ${track.title}`;
