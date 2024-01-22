@@ -634,56 +634,51 @@
         });
     </script>
 
-    <!-- --------------------+
-    |     Верхняя панель     |
-    +--------------------- -->
-
-    <div class="top-panel">
-        <div class="burger-menu-button" onclick="toggleSidebar()">☰</div>
-        <div class="logo">Sportify</div>
-        <!-- <div class="search-container">
+    <!-- --------------------------+
+    |   Верхняя и боковая панели   |
+    +--------------------------- -->
+    <div Верхняя и боковая панели>
+        <div class="top-panel">
+            <div class="burger-menu-button" onclick="toggleSidebar()">☰</div>
+            <div class="logo">Sportify</div>
+            <!-- <div class="search-container">
             <button onclick="toggleSearch()">🔍</button>
             <input id="search-input" type="text" placeholder="Поиск...">
         </div> -->
-        <button class="login-button" onclick="window.location.href = 'logreg.html'">Войти</button>
-    </div>
-
-    <!-- --------------------+
-    |     Верхняя панель     |
-    +--------------------- -->
-
-    <!-- --------------------+
-    |     Боковая панель     |
-    +--------------------- -->
-    <div class="sidebar">
-        <button onclick="window.location.href = 'index.html'"><img src="shit/house2.png">Главная</button>
-        <button onclick="window.location.href = 'profile.html'"><img src="shit/user2.png">Профиль</button>
-        <button onclick="window.location.href = 'playlists.html'"><img src="shit/playlist2.png">Плейлисты</button>
-        <button onclick="window.location.href = 'video.html'"><img src="shit/видео.png">Видео</button>
-        <img src="shit/полоса4.png" alt="" width="100%">
-        <button onclick="window.location.href = 'chat.html'"><img src="shit/chat2.png">Сообщения</button>
-        <button onclick="window.location.href = 'author.html'"><img src="shit/group.png">Авторы</button>
-        <button onclick="window.location.href = 'clicker.html'"><img src="shit/game2.png">Кликер</button>
-        <img src="shit/полоса4.png" alt="" width="100%">
-        <!-- Дополнительные элементы в sidebar -->
-        <h3>Ваша Библиотека</h3>
-        <ul>
-            <li>Созданные плейлисты</li>
-            <li>Понравившиеся песни</li>
-            <li>Альбомы</li>
-            <li>Исполнители</li>
-            <li>Подкасты</li>
-        </ul>
-
-        <div>
-            <br><br><br>
-            <br><br><br>
+            <button class="login-button" onclick="window.location.href = 'logreg.html'">Войти</button>
         </div>
 
+        <div class="sidebar">
+            <button onclick="window.location.href = 'index.html'"><img src="shit/house2.png">Главная</button>
+            <button onclick="window.location.href = 'profile.html'"><img src="shit/user2.png">Профиль</button>
+            <button onclick="window.location.href = 'playlists.html'"><img src="shit/playlist2.png">Плейлисты</button>
+            <button onclick="window.location.href = 'video.html'"><img src="shit/видео.png">Видео</button>
+            <img src="shit/полоса4.png" alt="" width="100%">
+            <button onclick="window.location.href = 'chat.html'"><img src="shit/chat2.png">Сообщения</button>
+            <button onclick="window.location.href = 'author.html'"><img src="shit/group.png">Авторы</button>
+            <button onclick="window.location.href = 'clicker.html'"><img src="shit/game2.png">Кликер</button>
+            <img src="shit/полоса4.png" alt="" width="100%">
+            <!-- Дополнительные элементы в sidebar -->
+            <h3>Ваша Библиотека</h3>
+            <ul>
+                <li>Созданные плейлисты</li>
+                <li>Понравившиеся песни</li>
+                <li>Альбомы</li>
+                <li>Исполнители</li>
+                <li>Подкасты</li>
+            </ul>
+
+            <div>
+                <br><br><br>
+                <br><br><br>
+                <br><br><br>
+            </div>
+
+        </div>
     </div>
-    <!-- --------------------+
-    |     Боковая панель     |
-    +--------------------- -->
+    <!-- --------------------------+
+    |   Верхняя и боковая панели   |
+    +--------------------------- -->
 
     <!-- --------------------+
     |     Плеер по центру    |
@@ -1142,7 +1137,7 @@
         const audioPlayer = document.querySelector('.audio-player');
         const currentTimeDisplay = document.querySelector('.current-time');
         const durationDisplay = document.querySelector('.duration-time');
-        
+
         document.addEventListener('DOMContentLoaded', function () {
             var burgerButton = document.querySelector('.burger-menu-button');
             var sidebar = document.querySelector('.sidebar');
@@ -1228,7 +1223,7 @@
             }
         });
 
-        
+
 
         audioPlayer.addEventListener('timeupdate', () => {
             const progressBar = document.querySelector('.progress-bar');
