@@ -977,6 +977,30 @@
             #track-list .title {
                 font-size: 0.9rem;
             }
+
+            .seek-container {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .seek {
+                height: 5px;
+                background-color: #fff;
+                position: relative;
+                cursor: pointer;
+            }
+
+            .seek .thumb {
+                height: 12px;
+                width: 12px;
+                background-color: #fff;
+                position: absolute;
+                top: -4px;
+                left: -6px;
+                border-radius: 50%;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+            }
         </style>
 
         <div class="container">
@@ -1002,6 +1026,9 @@
 
             <div class="progress-container">
                 <div class="progress"></div>
+            </div>
+            <div class="seek-container">
+                <div class="seek" id="seek"></div>
             </div>
 
             <div class="track-info">
@@ -1045,6 +1072,8 @@
             ];
 
             const trackList = document.getElementById('track-list');
+            const seek = document.getElementById('seek');
+            const seekThumb = seek.querySelector('.thumb');
 
             trackList.querySelector('ul').addEventListener('click', (event) => {
                 if (event.target.tagName === 'LI') {
@@ -1125,7 +1154,29 @@
                 }
                 document.querySelector('.current-time').textContent = currentMinutes + ':' + currentSeconds;
                 document.querySelector('.duration').textContent = durationMinutes + ':' + durationSeconds;
+
+                seek.style.width = (audio.currentTime / audio.duration) * 100 + '%';
             };
+
+            seek.addEventListener('mousedown', function (e) {
+                const seekPercent = (e.clientX - seek.getBoundingClientRect().left) / seek.offsetWidth;
+                audio.currentTime = seekPercent * audio.duration;
+                seek.style.width = seekPercent * 100 + '%';
+                seekThumb.style.left = seekPercent * 100 + '%';
+            });
+
+            document.addEventListener('mouseup', function () {
+                seek.removeEventListener('mousemove', seekMoveHandler);
+            });
+
+            const seekMoveHandler = function (e) {
+                const seekPercent = (e.clientX - seek.getBoundingClientRect().left) / seek.offsetWidth;
+                audio.currentTime = seekPercent * audio.duration;
+                seek.style.width = seekPercent * 100 + '%';
+                seekThumb.style.left = seekPercent * 100 + '%';
+            };
+
+            seek.addEventListener('mousemove', seekMoveHandler);
 
             var volumeSlider = document.querySelector('.volume-slider');
             var volumeBar = document.querySelector('.volume-bar');
