@@ -481,7 +481,7 @@
         </style>
 
         <div class="player">
-            <button class="image-button" onclick="togglePlay()">
+            <button class="image-button" id="play-pause">
                 <div class="cover-art">
                     <img src="" alt="Обложка альбома" class="cover-image" id="randomImage" />
                 </div>
@@ -560,6 +560,8 @@
                 updatePlayPauseButton();
             }
 
+            // Add onclick event listener to the image
+            document.getElementById("randomImage").onclick = togglePlay;
         </script>
 
     </div>
@@ -905,18 +907,120 @@
 
     <div музыка>
 
+        <style>
+            #player {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: #333;
+                padding: 1rem;
+                border-radius: 5px;
+            }
+
+            #player audio {
+                width: 50%;
+            }
+
+            #player .controls {
+                display: flex;
+                align-items: center;
+            }
+
+            #player .controls button {
+                background-color: transparent;
+                border: none;
+                color: #fff;
+                font-size: 1.5rem;
+                margin: 0 0.5rem;
+                cursor: pointer;
+            }
+
+            #player .controls button:hover {
+                color: #ccc;
+            }
+
+            .progress {
+                height: 5px;
+                background-color: #ccc;
+                position: relative;
+            }
+
+            .progress-bar {
+                height: 100%;
+                background-color: #fff;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .volume-slider {
+                width: 7rem;
+                height: 1rem;
+                background-color: #ccc;
+                position: relative;
+                margin: 0 1rem;
+            }
+
+            .volume-bar {
+                height: 100%;
+                background-color: #fff;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            #track-list .artist {
+                font-weight: bold;
+                margin-right: 0.5rem;
+            }
+
+            #track-list .title {
+                font-size: 0.9rem;
+            }
+        </style>
+
         <div class="container">
             <div class="center">
-                <div id="music-container"></div>
+                <div id="music-container">
+                    <div id="track-list">
+                        <h2>Tracks</h2>
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+
         <br><br><br><br><br><br>
+
+        <div id="player">
+            <div class="controls">
+                <button id="prev">⏮</button>
+                <button id="play-pause">⏯</button>
+                <button id="next">⏭</button>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress"></div>
+            </div>
+
+            <div class="track-info">
+                <strong id="track-title">Track Title</strong>
+                <span id="track-artist">Track Artist</span>
+            </div>
+
+            <div class="time">
+                <span class="current-time">0:00</span>
+                <span class="divider">/</span>
+                <span class="duration">0:00</span>
+            </div>
+
+            <audio></audio>
+        </div>
 
         <a href="tracks/all/freddie_dredd (3).mp3"></a>
 
         <script>
-            const musicContainer = document.getElementById('music-container');
-
             var tracks = [
                 {
                     artist: "The Prodigy",
@@ -938,30 +1042,107 @@
                     title: "GTG",
                     src: "tracks/all/freddie_dredd (4).mp3"
                 },
-                {
-                    artist: "Freddie Dredd",
-                    title: "KILLIN' ON DEMAND",
-                    src: "tracks/all/freddie_dredd (5).mp3"
-                },
-                {
-                    artist: "Freddie Dredd",
-                    title: "LIMBO",
-                    src: "tracks/all/freddie_dredd (6).mp3"
-                },
             ];
 
-            tracks.forEach(track => {
-                const audio = document.createElement('audio');
-                audio.src = track.src;
-                audio.controls = true;
-                audio.volume = 0.1;
+            const trackList = document.getElementById('track-list');
 
-                const title = document.createElement('p');
-                title.textContent = `${track.artist} - ${track.title}`;
-
-                musicContainer.appendChild(title);
-                musicContainer.appendChild(audio);
+            trackList.querySelector('ul').addEventListener('click', (event) => {
+                if (event.target.tagName === 'LI') {
+                    const trackIndex = Array.from(trackList.querySelector('ul').children).indexOf(event.target);
+                    currentTrack = trackIndex;
+                    loadTrack();
+                    audio.play();
+                }
             });
+
+            tracks.forEach((track, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>${index + 1}.</strong> <span class="artist">${track.artist}</span> - <span class="title">${track.title}</span>`;
+                listItem.addEventListener('click', () => {
+                    currentTrack = index;
+                    loadTrack();
+                    audio.play();
+                });
+                trackList.querySelector('ul').appendChild(listItem);
+            });
+
+            const player = document.getElementById('player');
+            const audio = player.querySelector('audio');
+            const prevButton = player.querySelector('#prev');
+            const playPauseButton = player.querySelector('#play-pause');
+            const nextButton = player.querySelector('#next');
+
+            let currentTrack = 0;
+
+            function loadTrack() {
+                audio.src = tracks[currentTrack].src;
+                document.getElementById('track-title').textContent = tracks[currentTrack].title;
+                document.getElementById('track-artist').textContent = tracks[currentTrack].artist;
+            }
+
+            loadTrack();
+
+            playPauseButton.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    playPauseButton.textContent = '⏯';
+                } else {
+                    audio.pause();
+                    playPauseButton.textContent = '⏸';
+                }
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentTrack = (currentTrack + 1) % tracks.length;
+                loadTrack();
+                audio.play();
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+                loadTrack();
+                audio.play();
+            });
+
+            audio.ontimeupdate = function () {
+                var currentTime = Math.floor(audio.currentTime);
+                var duration = Math.floor(audio.duration);
+                var currentMinutes = Math.floor(currentTime / 60);
+                var currentSeconds = currentTime - currentMinutes * 60;
+                var durationMinutes = Math.floor(duration / 60);
+                var durationSeconds = duration - durationMinutes * 60;
+                if (currentSeconds < 10) {
+                    currentSeconds = '0' + currentSeconds;
+                }
+                if (durationSeconds < 10) {
+                    durationSeconds = '0' + durationSeconds;
+                }
+                if (currentMinutes < 10) {
+                    currentMinutes = '0' + currentMinutes;
+                }
+                if (durationMinutes < 10) {
+                    durationMinutes = '0' + durationMinutes;
+                }
+                document.querySelector('.current-time').textContent = currentMinutes + ':' + currentSeconds;
+                document.querySelector('.duration').textContent = durationMinutes + ':' + durationSeconds;
+            };
+
+            var volumeSlider = document.querySelector('.volume-slider');
+            var volumeBar = document.querySelector('.volume-bar');
+            var volume = audio.volume;
+
+            volumeSlider.oninput = function () {
+                volume = this.value / 100;
+                audio.volume = volume;
+                updateVolumeBar();
+            };
+
+            function updateVolumeBar() {
+                var percentage = volume * 100;
+                volumeBar.style.width = percentage + '%';
+            }
+
+            updateVolumeBar();
 
         </script>
     </div>
@@ -973,394 +1154,6 @@
     <!-- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑-  ↑ -->
     <!-- ----------------------------------------------------------- -->
     <!-- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓- ↓-  ↓ -->
-
-    <!-- --------------------+
-    |     Нижняя панель      |
-    +--------------------- -->
-
-    <div нижняя панель>
-
-        <style>
-            .controls {
-                padding: 0 0px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                height: 90px;
-                background-color: #181818;
-                padding: 0 0;
-                box-shadow: 0 -2px 4px rgb(0 0 0 / 50%);
-                /* z-index: 101; */
-
-            }
-
-            .controls .left,
-            .controls .center,
-            .controls .right {
-                display: flex;
-                align-items: center;
-                position: absolute;
-                bottom: 25px;
-            }
-
-            .controls .left {
-                left: 40px;
-            }
-
-            .controls .right {
-                right: 30px;
-            }
-
-            .controls button {
-                background: none;
-                border: none;
-                color: inherit;
-                padding: 10px;
-                cursor: pointer;
-                font-size: 18px;
-                transition: color 0.3s ease;
-            }
-
-            .controls button:hover {
-                color: #1db954;
-            }
-
-            .controls .progress-bar {
-                -webkit-appearance: none;
-                appearance: none;
-                width: 100%;
-                height: 4px;
-                background: #535353;
-                border-radius: 2px;
-                outline: none;
-                position: relative;
-                left: 50%;
-                transform: translateX(-50%);
-
-            }
-
-            .controls .progress-bar::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                appearance: none;
-                width: 12px;
-                /* Width of the slider handle */
-                height: 12px;
-                /* Height of the slider handle */
-                background: #1db954;
-                cursor: pointer;
-                /* Cursor on hover */
-                border-radius: 50%;
-            }
-
-            /* Контейнер громкости */
-            .controls .volume-container {
-                position: absolute;
-                right: 0;
-                display: flex;
-                align-items: center;
-            }
-
-            .controls .progress-container {
-                position: absolute;
-                top: -10px;
-                width: 100%;
-                padding: 0;
-            }
-
-            .controls .center {
-                left: 50%;
-                transform: translateX(-50%);
-                display: flex;
-                align-items: center;
-                gap: 15px;
-                /* Расстояние между элементами */
-            }
-
-            /* Стиль для ползунка громкости */
-            .controls .volume-slider {
-                width: 100px;
-                height: 4px;
-                border-radius: 2px;
-                background: #535353;
-                outline: none;
-                opacity: 0.7;
-                -webkit-transition: .2s;
-                transition: opacity .2s;
-            }
-
-            .controls .volume-slider:hover {
-                opacity: 1;
-            }
-
-            .controls .volume-slider::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                appearance: none;
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                background: #1db954;
-                cursor: pointer;
-            }
-
-            .controls .volume-slider::-moz-range-thumb {
-                width: 12px;
-                height: 12px;
-                border: none;
-                border-radius: 50%;
-                background: #1db954;
-                cursor: pointer;
-            }
-
-            #togglePlayButton {
-                width: 40px;
-            }
-
-            #toggleBackFrontButton {
-                width: 40px;
-            }
-
-            .track-current {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                /* Расстояние между иконкой и текстом трека */
-            }
-
-            .track-current-img {
-                width: 40px;
-                height: 40px;
-                object-fit: cover;
-                border-radius: 50%;
-            }
-
-            .track-current-info {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .track-action-like,
-            .track-action-add,
-            .track-action-share {
-                background: none;
-                border: none;
-                color: #ccc;
-                font-size: 16px;
-                padding: 5px;
-                cursor: pointer;
-                transition: color 0.3s ease;
-            }
-
-            .volume-slider {
-                width: 100px;
-                /* Можно настроить */
-                margin-left: 12px;
-                /* Отступ слева от иконки */
-            }
-
-            .track-action-like:hover,
-            .track-action-add:hover,
-            .track-action-share:hover {
-                color: #fff;
-                /* Белый цвет при наведении */
-            }
-
-            .volume-container {
-                display: flex;
-                align-items: center;
-                /* Это выравнивает содержимое по правому краю */
-                padding-right: 30px;
-                position: relative;
-                /* Это нам нужно, чтобы корректно позиционировать ползунок */
-            }
-
-            @media(max-width: 1200px) {
-                .track-current {
-                    display: none;
-                }
-
-                .track-current-info {
-                    display: none;
-
-                }
-            }
-
-            @media (max-width: 768px) {
-
-                .controls .center {
-                    gap: 10px;
-                    justify-content: space-around;
-                    padding: 0;
-                    width: 100%;
-                    position: relative;
-                    left: unset;
-                    transform: unset;
-                }
-
-                .controls .playback-controls {
-                    display: flex;
-                    justify-content: center;
-                    width: 100%;
-                }
-
-                .controls .volume-slider,
-                .controls .volume-container,
-                .controls .track-action-like,
-                .controls .track-action-add,
-                .controls .track-action-share,
-                .controls button[onclick="toggleMute()"] {
-                    display: none;
-                }
-
-                .controls .playback-status {
-                    position: static;
-                    flex-grow: 1;
-                }
-
-                .controls button {
-                    font-size: 22px;
-                    padding: 5px 12px;
-                }
-
-                .progress-bar {
-                    width: 100%;
-                }
-
-                .track-current {
-                    transform: translateX(160px) translateY(27px);
-                }
-
-                .controls .left,
-                .controls .center,
-                .controls .right {
-                    align-items: center;
-                    justify-content: center;
-                }
-
-                .controls .left,
-                .controls .right {
-                    flex: 1;
-                }
-
-                .controls .center {
-                    flex: 3;
-                }
-
-                .controls button {
-                    margin: 0 5px;
-                }
-
-                .progress-bar {
-                    width: 80%;
-                }
-
-                .current-time,
-                .duration-time {
-                    margin: 0 10px;
-                }
-            }
-        </style>
-
-        <div class="controls">
-            <div class="left">
-
-                <!-- <button onclick="prevTrack()">⏮</button>
-            <button onclick="togglePlay()">▶️</button>
-            <button onclick="nextTrack()">⏭</button> -->
-
-                <button onclick="prevTrack()" id="toggleBackFrontButton"><img src="shit/previous.png"
-                        width="18px"></button>
-                <!-- <button onclick="togglePlay()"><img src="shit/play.png" width="22px"></button> -->
-                <button onclick="togglePlay()" id="togglePlayButton"><i class="fas fa-play"></i></button>
-                <button onclick="nextTrack()" id="toggleBackFrontButton"><img src="shit/next.png" width="18px"></button>
-
-                <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
-            </div>
-
-            <div class="progress-container">
-                <input type="range" class="progress-bar" value="0" step="1" min="0" max="100">
-            </div>
-
-            <div class="center">
-                <div class="track-current">
-                    <!-- <img class="track-current-img" src="shit/logo/logo (5).jpg" alt="Иконка трека" /> -->
-                    <div class="track-current-info">
-                        <span class="track-current-title">Название трека</span>
-                        <span class="track-current-artist">Исполнитель</span>
-                    </div>
-                </div>
-
-                <!-- <button class="track-action-like" onclick="showNotification()">❤️</button> -->
-                <button class="track-action-like" onclick="showNotification()"><img src="shit/heart.png"
-                        width="18px"></button>
-                <script лайк>
-                    function showNotification() {
-                        alert('Трек добавлен в раздел «Треки» Коллекции');
-                    }
-                </script>
-
-                <!-- <button class="track-action-add" onclick="showNotification2()">➕</button> -->
-                <button class="track-action-add" onclick="showNotification2()"><img src="shit/plus.png"
-                        width="18px"></button>
-                <script плейлист>
-                    function showNotification2() {
-                        alert('Трек добавлен в Плейлист');
-                    }
-                </script>
-
-                <!-- Непосредственно здесь вставляем ползунок громкости -->
-
-                <!-- <button class="track-action-share" onclick="copyLink()">📤</button> -->
-                <button class="track-action-share" onclick="copyLink()"><img src="shit/share.png" width="18px"></button>
-                <script поделиться>
-                    function copyLink() {
-                        var dummy = document.createElement('input');
-                        var url = window.location.href;
-                        document.body.appendChild(dummy);
-                        dummy.value = url;
-                        dummy.select();
-                        document.execCommand('copy');
-                        document.body.removeChild(dummy);
-                        alert('Ссылка скопирована: ' + url);
-                    }
-                </script>
-
-                <!-- <button onclick="toggleMute()">🔊</button> -->
-                <button onclick="toggleMute()"><img src="shit/volume.png" width="18px"></button>
-
-                <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.1"
-                    title="Громкость">
-
-                <script громкость>
-                    document.getElementById("volume-slider").addEventListener("input", function () {
-                        var volume = this.value; // получаем значение ползунка
-                        var players = document.querySelectorAll(".audio-player"); // получаем все аудиоплееры
-
-                        players.forEach(function (player) {
-                            player.volume = volume; // устанавливаем громкость для каждого аудиоплеера
-                        });
-                    });
-
-                    // Установить громкость на 10% 
-                    var audioPlayers = document.querySelectorAll('.audio-player');
-                    audioPlayers.forEach(function (audio) {
-                        audio.volume = 0.1;
-                    });
-                </script>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- --------------------+
-    |     Нижняя панель      |
-    +--------------------- -->
-
-    <!-- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑- ↑-  ↑ -->
-    <!-- ----------------------------------------------------------- -->
 
     <script скрипты>
 
