@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Добавьте стили для классов здесь */
+    </style>
+</head>
+
+<body>
+    <div class="burger-menu">
+        <button>Page 1</button>
+        <button>Page 2</button>
+        <button>Page 3</button>
+    </div>
+
+    <div id="page-content"></div>
+
+    <script>
+        const pages = [
+            {
+                title: 'Page 1',
+                content: `<div альбомы>
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        width: 100%;
+        /* <= Новое свойство для ширины */
+        /* Остальные свойства... */
+    }
+
+    .section {
+        margin-bottom: 40px;
+    }
+
+    .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .section-content {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .center {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 15px;
+        /* Добавим пространство между блоками */
+        margin-top: 56px;
+    }
+
+    .author-box {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
+        max-width: 350px;
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: calc(50% - 30px);
+    }
+
+    .author-info {
+        color: #000;
+    }
+
+    .author-name {
+        color: #512da8;
+        margin: 5px 0;
+    }
+
+    .author-desc {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .author-gif {
+        border-radius: 15px;
+        width: 100%;
+        max-width: 200px;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+
+        .container {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .section-content {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .center {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            margin-top: 56px;
+        }
+
+        .author-box {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            max-width: 340px;
+            flex-grow: 1;
+            flex-shrink: 0;
+            flex-basis: calc(100% - 30px);
+        }
+
+        .author-info {
+            color: #000;
+        }
+
+        .author-name {
+            color: #512da8;
+            margin: 5px 0;
+        }
+
+        .author-desc {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .author-gif {
+            border-radius: 15px;
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+<div class="container">
+    <h1 style="display: flex; justify-content: center;">Альбомы</h1>
+
+    <!-- ----------------------+
+    |       Новые релизы       |
+    +----------------------- -->
+
+    <div style="padding-top: 56px;">
+        <main class="section">
+            <h2 class="section-title">Новые релизы
+            </h2>
+        </main>
+    </div>
+
+    <div class="center">
+        <div class="author-box">
+            <img src="shit/logo/BERSERK.jpg" alt="Developer Avatar" class="author-gif">
+            <div class="author-info">
+
+                <a href="https://music.yandex.ru/album/28933418" class="author-name-button">
+                    <h3 class="author-name">BERSERK</h3>
+                </a>
+
+                <p class="author-desc">Makishima, MEELBRN <br> 2024 фонк</p>
+            </div>
+        </div>
+
+        <div class="author-box">
+            <img src="shit/logo/PIMP PARTY.jpg" alt="Developer Avatar" class="author-gif">
+            <div class="author-info">
+
+                <a href="https://music.yandex.ru/album/29071636" class="author-name-button">
+                    <h3 class="author-name">PIMP PARTY</h3>
+                </a>
+
+                <p class="author-desc">MISTA PLAYA <br> 2024 фонк</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ----------------------+
+    |       Новые релизы       |
+    +----------------------- -->
+
+    <!-- ----------------------+
+    |     Подкасты и книги     |
+    +----------------------- -->
+
+    <div style="padding-top: 56px;">
+        <main class="section">
+            <h2 class="section-title">Подкасты и книги
+            </h2>
+        </main>
+    </div>
+
+    <div class="center">
+        <div class="author-box">
+            <img src="shit/logo/дело.png" alt="Developer Avatar" class="author-gif">
+            <div class="author-info">
+
+                <a href="https://music.yandex.ru/users/yamusic-podcast/playlists/1088"
+                    class="author-name-button">
+                    <h3 class="author-name">Заняться делом</h3>
+                </a>
+
+                <p class="author-desc">Пока руки заняты созданием прекрасного, погрузитесь в захватывающие
+                    истории или послушайте вдохновляющие беседы о ремёслах и мастерах своего дела.
+                </p>
+            </div>
+        </div>
+
+        <div class="author-box">
+            <img src="shit/logo/аппетит.png" alt="Developer Avatar" class="author-gif">
+            <div class="author-info">
+
+                <a href="https://music.yandex.ru/users/yamusic-podcast/playlists/1017"
+                    class="author-name-button">
+                    <h3 class="author-name">Звучит аппетитно</h3>
+                </a>
+
+                <p class="author-desc">Подкасты, от которых текут слюнки: о еде, напитках и местах, где всё это
+                    можно попробовать
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ----------------------+
+    |     Подкасты и книги     |
+    +----------------------- -->
+
+    <!-- ----------------------+
+    |   Популярные плейлисты   |
+    +----------------------- -->
+    <div style="padding-top: 56px;">
+        <main class="section">
+            <h2 class="section-title">Популярные плейлисты
+            </h2>
+        </main>
+    </div>
+
+    <div class="center">
+        <div class="author-box">
+            <img src="shit/logo/бр.png" alt="Developer Avatar" class="author-gif">
+            <div class="author-info">
+
+                <a href="https://music.yandex.ru/users/yandexmusic/playlists/1213" class="author-name-button">
+                    <h3 class="author-name">Бразильский фонк</h3>
+                </a>
+
+                <p class="author-desc">Музыка жанров Brazilian phonk/Baile funk/Brazilian funk, пропитанная
+                    духом латиноамериканских джунглей.
+                </p>
+            </div>
+        </div>
+
+        <div class="author-box">
+            <img src="shit/logo/фонк.png" alt="Developer Avatar" class="author-gif">
+            <div class="author-info">
+
+                <a href="https://music.yandex.ru/users/music-blog/playlists/2710" class="author-name-button">
+                    <h3 class="author-name">Фонк</h3>
+                </a>
+                <p class="author-desc">Поджанр хип-хопа, вдохновлённый Мемфис-рэпом 1990-х годов. Оккультная
+                    тематика в текстах, старые фанковые сэмплы в музыке — вот несколько отличительных черт
+                    стиля, который снова вовсю набирает популярность.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ----------------------+
+    |   Популярные плейлисты   |
+    +----------------------- -->
+
+    <br><br><br><br><br><br><br><br>
+
+</div>
+
+</div>`
+            },
+            {
+                title: 'Page 2',
+                content: `<div class="main-content">
+        <div class="profile-container">
+            <!-- Заголовок -->
+            <div class="profile-header">
+                <h2>Мои плейлисты</h2>
+            </div>
+
+            <!-- Список плейлистов -->
+            <div class="user-playlists">
+                <div class="playlists-container">
+
+                    <button class="playlist-button" onclick="location.href='playlist1.html';">
+                        <div class="playlist-item">
+                            <img src="shit/logo/prodigy.jpg" alt="Обложка плейлиста 1">
+                            <h3>The Prodigy</h3>
+                        </div>
+                    </button>
+
+                    <button class="playlist-button" onclick="location.href='playlist2.html';">
+                        <div class="playlist-item">
+                            <img src="shit/logo/suicide.jpg" alt="Обложка плейлиста 1">
+                            <h3>Suicideboys</h3>
+                        </div>
+                    </button>
+
+                    <button class="playlist-button" onclick="location.href='playlist3.html';">
+                        <div class="playlist-item">
+                            <img src="shit/logo/queen.png" alt="Обложка плейлиста 1">
+                            <h3>Queen</h3>
+                        </div>
+                    </button>
+
+                    <button class="playlist-button" onclick="location.href='playlist4.html';">
+                        <div class="playlist-item">
+                            <img src="shit/logo/logo (3).jpg" alt="Обложка плейлиста 1">
+                            <h3>Skrillex</h3>
+                        </div>
+                    </button>
+
+                    <button class="playlist-button" onclick="location.href='playlist4.html';">
+                        <div class="playlist-item">
+                            <img src="shit/logo/" alt="Обложка плейлиста 1">
+                            <h3></h3>
+                        </div>
+                    </button>
+
+
+                </div>
+            </div>
+
+            <p>
+                <br><br><br><br><br>
+            </p>
+        </div>
+    </div>`
+            },
+            {
+                title: 'Page 3',
+                content: ` <div class="profile-container">
+        <div class="profile-header">
+            <img class="profile-avatar" src="shit/logo/profile.jpg" alt="Аватар пользователя">
+            <h1 class="profile-username">Имя пользователя</h1>
+        </div>
+
+        <!-- Блок с информацией пользователя -->
+        <div class="profile-info">
+            <div class="info-item">
+                <span class="info-title">Электронная почта:</span>
+                <span class="info">user@example.com</span>
+            </div>
+            <div class="info-item">
+                <span class="info-title">Дата регистрации:</span>
+                <span class="info">01.01.2023</span>
+            </div>
+            <div class="info-item">
+                <span class="info-title">Страна:</span>
+                <span class="info">Россия</span>
+            </div>
+            <div class="info-item">
+                <span class="info-title">Подписка:</span>
+                <span class="info">Premium</span>
+            </div>
+        </div>
+
+        <!-- Плейлисты пользователя -->
+        <div class="user-playlists">
+            <h2>Плейлисты</h2>
+            <ul>
+                <li onclick="window.location.href = 'playlist1.html'">Мой Любимый плейлист</li>
+            </ul>
+        </div>
+
+        <!-- Последняя активность -->
+        <div class="user-activity">
+            <h2>Последняя активность:</h2>
+            <p>18.01.2024</p>
+            <!-- Дополнительная активность -->
+        </div>
+
+    </div>`
+            }
+        ];
+
+        document.querySelector('.burger-menu').addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                const index = Array.from(document.querySelectorAll('.burger-menu button')).indexOf(event.target);
+                showPage(pages[index]);
+            }
+        });
+
+        function showPage(page) {
+            const pageContent = document.getElementById('page-content');
+            pageContent.innerHTML = page.content;
+        }
+
+    </script>
+</body>
+
+</html>
