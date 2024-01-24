@@ -876,7 +876,7 @@
 
     <div треки>
 
-        <!-- <audio class="audio-player" src="tracks/2.Prodigy/muzlome_The_Prodigy_-_Breathe_47896844.mp3" hidden
+        <audio class="audio-player" src="tracks/2.Prodigy/muzlome_The_Prodigy_-_Breathe_47896844.mp3" hidden
             autoplay="false"></audio>
         <audio class="audio-player"
             src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Blow (Official Audio) (128 kbps).mp3" hidden
@@ -900,7 +900,7 @@
             src="tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - WTH (Official Audio) (128 kbps).mp3" hidden
             autoplay="false"></audio>
         <audio class="audio-player" src="tracks/2.freddie_dredd/Y2mate.mx - Opaul (128 kbps).mp3" hidden
-            autoplay="false"></audio> -->
+            autoplay="false"></audio>
 
     </div>
 
@@ -989,17 +989,34 @@
                 },
             ];
 
+            let currentTrack = null;
+
             tracks.forEach(track => {
                 const audio = document.createElement('audio');
                 audio.src = track.src;
                 audio.controls = true;
                 audio.volume = 0.1;
+                audio.classList.add('track');
 
                 const title = document.createElement('p');
                 title.textContent = `${track.artist} - ${track.title}`;
 
                 musicContainer.appendChild(title);
                 musicContainer.appendChild(audio);
+
+                audio.addEventListener('play', () => {
+                    if (currentTrack && currentTrack !== audio) {
+                        currentTrack.pause();
+                        currentTrack.classList.remove('playing');
+                    }
+                    currentTrack = audio;
+                    currentTrack.classList.add('playing');
+                });
+
+                audio.addEventListener('ended', () => {
+                    currentTrack.classList.remove('playing');
+                    currentTrack = null;
+                });
             });
 
         </script>
