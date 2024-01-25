@@ -475,7 +475,8 @@
 
             .playlist-item img {
                 width: 100%;
-                height: auto;
+                height: 100%;
+                object-fit: cover;
             }
 
             @media (max-width: 768px) {
@@ -498,7 +499,6 @@
                 }
 
                 .playlist-button {
-                    padding: 15px;
                     display: block;
                     width: calc(40% - 10px);
                     /* Вычитаем 10px, чтобы учесть margin */
@@ -510,12 +510,11 @@
 
         <div class="main-content">
             <div class="profile-container">
-                <!-- Заголовок -->
+
                 <div class="profile-header">
                     <h2>Мои плейлисты</h2>
                 </div>
 
-                <!-- Список плейлистов -->
                 <div class="user-playlists">
                     <div class="playlists-container">
 
@@ -547,21 +546,8 @@
                             </div>
                         </button>
 
-                        <button class="playlist-button" onclick="location.href='playlist4.html';">
-                            <div class="playlist-item">
-                                <img src="shit/logo/" alt="Обложка плейлиста 1">
-                                <h3></h3>
-                            </div>
-                        </button>
-
-
                     </div>
                 </div>
-
-                <p>
-                    <br><br><br><br><br>
-                </p>
-
             </div>
         </div>
 
