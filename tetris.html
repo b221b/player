@@ -67,6 +67,7 @@
     +--------------------------- -->
 
     <div Верхняя и боковая панели>
+        
         <style>
             .top-panel {
                 display: flex;
@@ -241,6 +242,19 @@
                 transform: translateX(0);
             }
 
+            li {
+                color: #fff;
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            li a {
+                display: block;
+                color: #949494;
+                text-decoration: none;
+            }
+
+
             @media (max-width: 768px) {
                 .top-panel {
                     justify-content: space-between;
@@ -300,14 +314,15 @@
             <button onclick="window.location.href = 'clicker.html'"><img src="shit/game2.png">Кликер</button>
             <button onclick="window.location.href = 'tetris.html'"><img src="shit/tetris.png">Тетрис</button>
             <img src="shit/полоса4.png" alt="" width="100%">
-            <!-- Дополнительные элементы в sidebar -->
+
             <h3>Ваша Библиотека</h3>
+
             <ul>
-                <li>Созданные плейлисты</li>
-                <li>Понравившиеся песни</li>
-                <li>Альбомы</li>
-                <li>Исполнители</li>
-                <li>Подкасты</li>
+                <li><a href="playlists.html">Созданные плейлисты</a></li>
+                <li><a href="playlist1.html">Понравившиеся песни</a></li>
+                <li><a href="playlists.html">Альбомы</a></li>
+                <li><a href="playlists.html">Исполнители</a></li>
+                <li><a href="playlists.html">Подкасты</a></li>
             </ul>
 
             <div>
@@ -380,7 +395,7 @@
             height: 100%;
             margin: 0;
         }
-     
+
         /*делаем чёрный фон и выравниваем всё по центру*/
         body {
             background: black;
@@ -389,19 +404,19 @@
             justify-content: center;
             flex-direction: column;
         }
-     
+
         /*толщина холста — 1 пиксель, белый цвет*/
         canvas {
             border: 1px solid white;
         }
-     
+
         #score {
             color: white;
             font-size: 26px;
             font-weight: bold;
             margin-bottom: 20px;
         }
-     
+
         #pause-button {
             background-color: white;
             color: black;
@@ -411,12 +426,12 @@
             border-radius: 5px;
             margin-top: 20px;
         }
-     </style>
-     
-     <!-- рисуем поле для игры -->
-     <div id="score">Счет: 0</div>
-     <canvas width="320" height="640" id="game"></canvas>
-     <button onclick="togglePause()" id="pause-button">Пауза</button>
+    </style>
+
+    <!-- рисуем поле для игры -->
+    <div id="score">Счет: 0</div>
+    <canvas width="320" height="640" id="game"></canvas>
+    <button onclick="togglePause()" id="pause-button">Пауза</button>
 
     <script>
         let score = 0;

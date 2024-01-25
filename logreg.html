@@ -27,6 +27,23 @@
             background: #121212;
             color: #fff;
         }
+
+        /* Стили для скроллбара */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Стили для колесика скроллбара */
+        ::-webkit-scrollbar-thumb {
+            background-color: #cecece;
+            border-radius: 10px;
+        }
+
+        /* Стили для трека скроллбара */
+        ::-webkit-scrollbar-track {
+            background-color: #494949;
+            border-radius: 10px;
+        }
     </style>
 
 </head>
@@ -53,6 +70,7 @@
     +--------------------------- -->
 
     <div Верхняя и боковая панели>
+        
         <style>
             .top-panel {
                 display: flex;
@@ -227,6 +245,19 @@
                 transform: translateX(0);
             }
 
+            li {
+                color: #fff;
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            li a {
+                display: block;
+                color: #949494;
+                text-decoration: none;
+            }
+
+
             @media (max-width: 768px) {
                 .top-panel {
                     justify-content: space-between;
@@ -286,14 +317,15 @@
             <button onclick="window.location.href = 'clicker.html'"><img src="shit/game2.png">Кликер</button>
             <button onclick="window.location.href = 'tetris.html'"><img src="shit/tetris.png">Тетрис</button>
             <img src="shit/полоса4.png" alt="" width="100%">
-            <!-- Дополнительные элементы в sidebar -->
+
             <h3>Ваша Библиотека</h3>
+
             <ul>
-                <li>Созданные плейлисты</li>
-                <li>Понравившиеся песни</li>
-                <li>Альбомы</li>
-                <li>Исполнители</li>
-                <li>Подкасты</li>
+                <li><a href="playlists.html">Созданные плейлисты</a></li>
+                <li><a href="playlist1.html">Понравившиеся песни</a></li>
+                <li><a href="playlists.html">Альбомы</a></li>
+                <li><a href="playlists.html">Исполнители</a></li>
+                <li><a href="playlists.html">Подкасты</a></li>
             </ul>
 
             <div>
@@ -498,7 +530,7 @@
         </script>
 
     </div>
-    
+
     <!-- --------------------+
     |          логрег        |
     +--------------------- -->
