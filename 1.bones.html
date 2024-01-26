@@ -599,7 +599,7 @@
     +--------------------------- -->
 
     <div Верхняя и боковая панели>
-        
+
         <style>
             .top-panel {
                 display: flex;
@@ -1059,75 +1059,80 @@
         <br><br><br><br><br><br>
 
         <a href="tracks/all/freddie_dredd (3).mp3"></a>
+        
+        <script src="db_tracks/bones.js"></script>
 
-        <script>
-            const musicContainer = document.getElementById('music-container');
+        <div script>
 
-            var tracks = [
-                {
-                    artist: "The Prodigy",
-                    title: "Breathe",
-                    src: "tracks/2.Prodigy/muzlome_The_Prodigy_-_Breathe_47896844.mp3"
-                },
-                {
-                    artist: "Freddie Dredd",
-                    title: "Blow",
-                    src: "tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Blow (Official Audio) (128 kbps).mp3"
-                },
-                {
-                    artist: "Freddie Dredd",
-                    title: "Delete",
-                    src: "tracks/all/freddie_dredd (3).mp3"
-                },
-                {
-                    artist: "Freddie Dredd",
-                    title: "GTG",
-                    src: "tracks/all/freddie_dredd (4).mp3"
-                },
-                {
-                    artist: "Freddie Dredd",
-                    title: "KILLIN' ON DEMAND",
-                    src: "tracks/all/freddie_dredd (5).mp3"
-                },
-                {
-                    artist: "Freddie Dredd",
-                    title: "LIMBO",
-                    src: "tracks/all/freddie_dredd (6).mp3"
-                },
-            ];
+            <!-- <script>
+                const musicContainer = document.getElementById('music-container');
 
-            let currentTrack = null;
+                var tracks = [
+                    {
+                        artist: "The Prodigy",
+                        title: "Breathe",
+                        src: "tracks/2.Prodigy/muzlome_The_Prodigy_-_Breathe_47896844.mp3"
+                    },
+                    {
+                        artist: "Freddie Dredd",
+                        title: "Blow",
+                        src: "tracks/2.freddie_dredd/Y2mate.mx - Freddie Dredd - Blow (Official Audio) (128 kbps).mp3"
+                    },
+                    {
+                        artist: "Freddie Dredd",
+                        title: "Delete",
+                        src: "tracks/all/freddie_dredd (3).mp3"
+                    },
+                    {
+                        artist: "Freddie Dredd",
+                        title: "GTG",
+                        src: "tracks/all/freddie_dredd (4).mp3"
+                    },
+                    {
+                        artist: "Freddie Dredd",
+                        title: "KILLIN' ON DEMAND",
+                        src: "tracks/all/freddie_dredd (5).mp3"
+                    },
+                    {
+                        artist: "Freddie Dredd",
+                        title: "LIMBO",
+                        src: "tracks/all/freddie_dredd (6).mp3"
+                    },
+                ];
 
-            tracks.forEach(track => {
-                const audio = document.createElement('audio');
-                audio.src = track.src;
-                audio.controls = true;
-                audio.volume = 0.1;
-                audio.classList.add('track');
+                let currentTrack = null;
 
-                const title = document.createElement('p');
-                title.textContent = `${track.artist} - ${track.title}`;
+                tracks.forEach(track => {
+                    const audio = document.createElement('audio');
+                    audio.src = track.src;
+                    audio.controls = true;
+                    audio.volume = 0.1;
+                    audio.classList.add('track');
 
-                musicContainer.appendChild(title);
-                musicContainer.appendChild(audio);
+                    const title = document.createElement('p');
+                    title.textContent = `${track.artist} - ${track.title}`;
 
-                audio.addEventListener('play', () => {
-                    if (currentTrack && currentTrack !== audio) {
-                        currentTrack.pause();
+                    musicContainer.appendChild(title);
+                    musicContainer.appendChild(audio);
+
+                    audio.addEventListener('play', () => {
+                        if (currentTrack && currentTrack !== audio) {
+                            currentTrack.pause();
+                            currentTrack.classList.remove('playing');
+                        }
+                        currentTrack = audio;
+                        currentTrack.classList.add('playing');
+                    });
+
+                    audio.addEventListener('ended', () => {
                         currentTrack.classList.remove('playing');
-                    }
-                    currentTrack = audio;
-                    currentTrack.classList.add('playing');
+                        currentTrack = null;
+                    });
                 });
 
-                audio.addEventListener('ended', () => {
-                    currentTrack.classList.remove('playing');
-                    currentTrack = null;
-                });
-            });
+            </script> -->
 
-        </script>
-
+        </div>
     </div>
 
     <!-- --------------------+
