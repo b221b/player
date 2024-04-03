@@ -4,7 +4,7 @@ var tracks = [
     {
         artist: "Berserk",
         title: "Gutz",
-        src: "tracks/миксы/berserk1.mp3"
+        src: "tracks/миксы/berserk1.MP3"
     },
     
 ];
