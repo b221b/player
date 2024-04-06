@@ -16,11 +16,6 @@ var tracks = [
         title: "mix",
         src: "tracks/миксы/suicideboys.MP3"
     },
-    {
-        artist: "Enigma",
-        title: "mix",
-        src: "tracks/миксы/enigma.MP3"
-    },
 ];
 
 let currentTrack = null;
