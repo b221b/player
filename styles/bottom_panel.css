@@ -1,0 +1,281 @@
+.controls {
+    padding: 0 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    background-color: #181818;
+    padding: 0 0;
+    box-shadow: 0 -2px 4px rgb(0 0 0 / 50%);
+    /* z-index: 101; */
+
+}
+
+.controls .left,
+.controls .center,
+.controls .right {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 25px;
+}
+
+.controls .left {
+    left: 40px;
+}
+
+.controls .right {
+    right: 30px;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.controls button:hover {
+    color: #1db954;
+}
+
+.controls .progress-bar {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background: #535353;
+    border-radius: 2px;
+    outline: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+.controls .progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    /* Width of the slider handle */
+    height: 12px;
+    /* Height of the slider handle */
+    background: #1db954;
+    cursor: pointer;
+    /* Cursor on hover */
+    border-radius: 50%;
+}
+
+/* Контейнер громкости */
+.controls .volume-container {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+.controls .progress-container {
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    padding: 0;
+}
+
+.controls .center {
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Расстояние между элементами */
+}
+
+/* Стиль для ползунка громкости */
+.controls .volume-slider {
+    width: 100px;
+    height: 4px;
+    border-radius: 2px;
+    background: #535353;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.controls .volume-slider:hover {
+    opacity: 1;
+}
+
+.controls .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #1db954;
+    cursor: pointer;
+}
+
+.controls .volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background: #1db954;
+    cursor: pointer;
+}
+
+#togglePlayButton {
+    width: 40px;
+}
+
+#toggleBackFrontButton {
+    width: 40px;
+}
+
+.track-current {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Расстояние между иконкой и текстом трека */
+}
+
+.track-current-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.track-current-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.track-action-like,
+.track-action-add,
+.track-action-share {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.volume-slider {
+    width: 100px;
+    /* Можно настроить */
+    margin-left: 12px;
+    /* Отступ слева от иконки */
+}
+
+.track-action-like:hover,
+.track-action-add:hover,
+.track-action-share:hover {
+    color: #fff;
+    /* Белый цвет при наведении */
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    /* Это выравнивает содержимое по правому краю */
+    padding-right: 30px;
+    position: relative;
+    /* Это нам нужно, чтобы корректно позиционировать ползунок */
+}
+
+@media(max-width: 1200px) {
+    .track-current {
+        display: none;
+    }
+
+    .track-current-info {
+        display: none;
+
+    }
+}
+
+@media (max-width: 768px) {
+
+    .controls .center {
+        gap: 10px;
+        justify-content: space-around;
+        padding: 0;
+        width: 100%;
+        position: relative;
+        left: unset;
+        transform: unset;
+    }
+
+    .controls .playback-controls {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .controls .volume-slider,
+    .controls .volume-container,
+    .controls .track-action-like,
+    .controls .track-action-add,
+    .controls .track-action-share,
+    .controls button[onclick="toggleMute()"] {
+        display: none;
+    }
+
+    .controls .playback-status {
+        position: static;
+        flex-grow: 1;
+    }
+
+    .controls button {
+        font-size: 22px;
+        padding: 5px 12px;
+    }
+
+    .progress-bar {
+        width: 100%;
+    }
+
+    .track-current {
+        transform: translateX(160px) translateY(27px);
+    }
+
+    .controls .left,
+    .controls .center,
+    .controls .right {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .controls .left,
+    .controls .right {
+        flex: 1;
+    }
+
+    .controls .center {
+        flex: 3;
+    }
+
+    .controls button {
+        margin: 0 5px;
+    }
+
+    .progress-bar {
+        width: 80%;
+    }
+
+    .current-time,
+    .duration-time {
+        margin: 0 10px;
+    }
+}

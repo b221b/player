@@ -1,0 +1,25 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #121212;
+    color: #fff;
+}
+
+/* Стили для скроллбара */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Стили для колесика скроллбара */
+::-webkit-scrollbar-thumb {
+    background-color: #cecece;
+    border-radius: 10px;
+}
+
+/* Стили для трека скроллбара */
+::-webkit-scrollbar-track {
+    background-color: #494949;
+    border-radius: 10px;
+}

@@ -1,0 +1,127 @@
+/* Стили для блока профиля пользователя */
+.profile-container {
+    margin: 0;
+    padding: 20px;
+    position: relative;
+    top: 70px;
+    /* Высота верхней панели */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-username {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.profile-info {
+    margin-top: 20px;
+}
+
+.info-item {
+    margin-bottom: 10px;
+}
+
+.info-title {
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.info,
+.info-title {
+    color: #fff;
+}
+
+.user-playlists,
+.user-activity {
+    margin-top: 20px;
+}
+
+.user-playlists h2,
+.user-activity h2 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+/* Стили списков в профиле */
+.user-playlists ul,
+.user-activity ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-playlists li,
+.user-activity li {
+    color: #b3b3b3;
+    cursor: pointer;
+}
+
+.user-playlists li:hover,
+.user-activity li:hover {
+    color: #fff;
+}
+
+.edit-button-container {
+    margin-top: 20px;
+}
+
+.edit-button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.edit-button:hover {
+    background-color: #3e8e41;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin-left: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .profile-header,
+    .profile-info,
+    .user-playlists,
+    .user-activity {
+        width: 100%;
+        /* Для выравнивания элементов в одну колонку */
+    }
+
+    .info-item {
+        justify-content: space-between;
+        /* Гарантирует отступ между заголовками и информацией */
+    }
+}

@@ -1,0 +1,58 @@
+.container {
+    margin-top: 80px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.author {
+    margin-bottom: 20px;
+}
+
+.author img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.author h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.author p {
+    font-size: 18px;
+}
+
+/* ----- */
+
+.author2 {
+    display: inline-block;
+    margin: 0 10px 20px 10px;
+    vertical-align: top;
+    width: 45%;
+}
+
+.author2 img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.author2 h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.author2 p {
+    font-size: 18px;
+}
